@@ -1,0 +1,22 @@
+#footer * {
+	font-size: 12px;
+	line-height: normal;
+	list-style: none;
+	color: #333;
+}
+#footer > ul {
+	margin: 0 auto 9px;
+	text-align: center;
+}
+#footer > ul > li {
+	display: inline;
+	padding: 0 5px 0 7px;
+	border-left: 1px solid #dadada;
+}
+#footer > ul > li:first-child {
+	border-left: 0;
+}
+#footer > ul > li a:hover {
+	color: #3E4348;
+	text-decoration: underline;
+}
