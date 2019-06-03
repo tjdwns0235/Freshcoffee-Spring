@@ -5,8 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="${path}/css/common.css">
-<link rel="stylesheet" href="${path}/css/header.css">
+<link rel="stylesheet" href="${path}/resources/css/common.css">
+<link rel="stylesheet" href="${path}/resources/css/header.css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -15,7 +15,7 @@
 		<div id="modal_login">
 			<header>
 				<a href="#" id="title_img">
-					<img src="${path}/img/freshcoffee2.png" alt="커피 로고">
+					<img src="${path}/resources/img/freshcoffee2.png" alt="커피 로고">
 				</a>
 			</header>
 			
@@ -83,7 +83,7 @@
 				<div class="header_member">
 					  <ul>
 						<li><a href="#" id="modal_open">로그인</a></li>
-						<li><a href="${path}/constract.freshcoffee">회원가입</a></li>
+						<li><a href="${path}/member/constract">회원가입</a></li>
 						<li><a href="#">정보수정</a></li>
 						<li><a href="#" class="mypage">마이페이지</a>
 							<div class="dropdown">
@@ -105,7 +105,7 @@
 		
 		<div class="header_logo">
 			<div class="inner_header">
-				<img src="${path}/img/freshcoffee2.png" alt="로고이미지">
+				<img src="${path}/resources/img/freshcoffee2.png" alt="로고이미지">
 			</div>
 		</div>
     </header>

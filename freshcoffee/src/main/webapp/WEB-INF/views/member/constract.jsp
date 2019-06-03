@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../include/header.jsp"%>
     <%@include file="../include/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Freshcoffee 회원가입</title>
+<link rel="stylesheet" href="${path}/resources/css/common.css">
 <style type="text/css">
 		body, h1, ul, p, h3 {
 			margin:0;
@@ -57,7 +59,7 @@
 			border: 1px solid #ccc;
 		}
 		.lang>select {
-			background: url('images/sel_arr.gif')100% 50% no-repeat;
+			background: url('${path}/resources/img/sel_arr.gif')100% 50% no-repeat;
 			-webkit-appearance:none;
 			width: 98px;
 			height: 30px;
@@ -90,7 +92,7 @@
 			position: relative; 
 		}
 		.terms_span > label {
-			background: url('images/loginlff.PNG')100% 50% no-repeat;
+			background: url('${path}/resources/img/loginlff.PNG')100% 50% no-repeat;
 			display: block;
 			line-height: 20px;
 			height: 58px;
@@ -104,7 +106,7 @@
 			height: 58px;
 		}
 		.terms_span > input:checked +label {
-			background-image: url('images/loginon.PNG');
+			background-image: url('${path}/resources/img/loginon.PNG');
 		}
 		.terms_ul {
 			padding-bottom: 7px;
@@ -148,11 +150,11 @@
 			top: 50%;
 		}
 		.ul_li_span > label {
-			background: url('images/loginlff.PNG') 100% 50% no-repeat;
+			background: url('${path}/resources/img/loginlff.PNG') 100% 50% no-repeat;
 			display: block;
 		}
 		.ul_li_span > input:checked +label {
-			background-image: url('images/loginon.PNG');
+			background-image: url('${path}/resources/img/loginon.PNG');
 		}
 
 		.terms_box {

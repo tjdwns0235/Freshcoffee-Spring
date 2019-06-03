@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,7 +129,7 @@
 			padding: 11px 14px;
 		}
 		.sel {
-			background: #fff url("images/sel_arr.gif") 100% 50% no-repeat;
+			background: #fff url("${path}/resources/img/sel_arr.gif") 100% 50% no-repeat;
 			width: 100%;
 			height: 29px;
 			font-size: 15px;
@@ -477,8 +478,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function)(){
-		
-	)}
 		$('#selmail').change(function(){
 			var eUrl = $(this).val();
 			if (eUrl == 'directVal') {
@@ -489,9 +488,11 @@
 				$('#url').val(eUrl);
 				$('#url').prop('readonly', true);
 			}
-		});
+		)};
+	)};
+		
 	</script>
-	<script type="text/javascript" src="js/validation.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/validation.js"></script>
 	<script type="text/javascript">
 			//1. input에 값을 입력후 blur()하면 이벤트 발생
 			$(document).ready(function(){
@@ -536,12 +537,12 @@
 						alert(checkResult.desc);
 						
 						if(checkResult.code != 0) {
-							$(".error_next_box").eq(0).text(checkResult.desc)
+							$(".error_next_box").eq(1).text(checkResult.desc)
 										   	    .css("display", "block")
 											    .css("color", "#FF3636");
 							return false;
 						} else {
-							$(".error_next_box").eq(0).text(checkResult.desc)
+							$(".error_next_box").eq(1).text(checkResult.desc)
 										   	    .css("display", "block")
 											    .css("color", "#0000FF");
 							if (memRpw != null || memRpw.length == 0) {
@@ -571,12 +572,12 @@
 						alert(checkResult.desc);
 						
 						if(checkResult.code != 0) {
-							$(".error_next_box").eq(0).text(checkResult.desc)
+							$(".error_next_box").eq(2).text(checkResult.desc)
 										   	    .css("display", "block")
 											    .css("color", "#FF3636");
 							return false;
 						} else {
-							$(".error_next_box").eq(0).text(checkResult.desc)
+							$(".error_next_box").eq(2).text(checkResult.desc)
 										   	    .css("display", "block")
 											    .css("color", "#0000FF");
 							if (memPw != null || memPw.length == 0) {
@@ -674,7 +675,7 @@
 				 }
 			 });
 				
-			/*  $("#email").blur(function(){
+			$("#email").blur(function(){
 				var email = $.trim($(this).val());
 				var url = $.trim($("#url").val());
 				var regEmpty = /\s/g;
@@ -736,7 +737,7 @@
 					}
 				}
 			
-			)}; */
+			)}; 
 			
 			$('#sample6_address2').blur(function(){
 				var dAddr = $trim($(this).val());
@@ -749,7 +750,8 @@
 				}
 			});
 			
-		}); 
+			});
+			
 		
 		
 	 

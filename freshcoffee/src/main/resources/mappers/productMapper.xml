@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 다른 mapper와 중복되지 않도록 네임스페이스 기재 -->
+<mapper namespace="pdt">
+	<!--베스트상품 목록  -->
+	<select id="bestList" resultType="com.freshcoffee.domain.product.ProductDTO">
+		<![CDATA[
+			SELECT *
+			FROM (SELECT * FROM tbl_product
+			      ORDER BY p_good DESC)
+			WHERE rownum <= 3
+		]]>
+	</select>
+	
+	<!--신상품 목록  -->
+	<select id="newList" resultType="com.freshcoffee.domain.product.ProductDTO">
+		<![CDATA[
+			SELECT *
+			FROM (SELECT * FROM tbl_product
+			      ORDER BY p_indate DESC)
+			WHERE rownum <=3
+		]]>
+	</select>
+</mapper>

@@ -148,16 +148,16 @@ function ajaxCheck(memId){
 	// 	     결론: web.xml 이동
 
 	$.ajax({
-		url: "idCheck.freshcoffee",
+		url: "idcheck?id="+memId,
 		type: "POST",
-		dataType: "json",
-		data: "id="+memId,
+		contentType: "application/json",
 		success: function(data) {
+			console.log(data);
 			//29.Action단에서 전송한  message, id를
 			// data 매개변수로 받음
 //			   30. data.message의 값이 -1이면 => 중복 메시지 출력
 //			       data.message의 값이 1이면 사용가능함
-			if(data.message == "-1"){
+			if(data == 1){
 				$(".error_next_box").eq(0).text("이미 사용 중인 아이디가 있어요")
 										  .css("display", "block")
 										  .css("color", "#FF3636");
