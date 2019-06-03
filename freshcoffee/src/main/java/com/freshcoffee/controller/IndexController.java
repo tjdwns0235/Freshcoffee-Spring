@@ -24,7 +24,7 @@ public class IndexController {
 	
 	@RequestMapping("/")
 	public String index(Model model) {
-		log.info(">>>> Index 페이지");
+//		log.info(">>>> Index 페이지");
 		HashMap<String, List<ProductDTO>> map = service.productList();
 		model.addAttribute("pLists", map);
 		
