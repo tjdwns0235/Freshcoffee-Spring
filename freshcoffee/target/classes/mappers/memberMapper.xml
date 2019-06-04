@@ -9,6 +9,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT COUNT(id) FROM tbl_member
 		WHERE id = #{id}
 	</select>
+	
+	<insert id="create" parameterType="com.freshcoffee.domain.member.MemberDTO">
+		INSERT INTO tbl_member(id, pw, name, phone, email, zipcode, addr1, addr2, bir1, bir2, bir3)
+		VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{zipcode}, #{addr1}, #{addr2}, #{bir1}, #{bir2}, #{bir3})
+	</insert>
+	
+	<select id="login" parameterType="com.freshcoffee.domain.member.MemberDTO" resultType="String">
+		SELECT name FROM tbl_member
+		WHERE id = #{id} AND pw = #{pw}
+	</select>
+	
+	<select id="viewMember" parameterType="" resultType="com.freshcoffee.domain.member.MemberDTO">
+		SELECT * FROM tbl_member
+		WHERE id = #{id}
+	</select>
 </mapper>
 
 

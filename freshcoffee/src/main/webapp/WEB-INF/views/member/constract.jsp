@@ -40,7 +40,6 @@
 			display: block;
 			width: 330px;
 			height: 150px;
-			background: url("img/freshcoffee2.png");
 			margin: auto;
 			box-sizing: border-box;
 		}

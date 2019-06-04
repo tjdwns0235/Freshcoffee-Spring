@@ -242,7 +242,7 @@
 	</header>
 
 	<section>
-		<form class="join_form" method="POST" action="memberPlay.freshcoffee">
+		<form class="join_form" method="POST" action="${path}/member/create" name="frm_mem" id="frm_mem">
 			<div class="container">
 				<div class="join_content">
 					<div class="row_group">
@@ -263,7 +263,7 @@
 								<label for="pwd1">비밀번호</label>
 							</h3>
 							<span class="ps_box int_pass">
-								<input type="password" name="pwd1" class="int" id="pwd1" maxlength="20">
+								<input type="password" name="pwd1" class="int" id="pw" maxlength="20">
 								<span class="step_url"><i class="fas fa-unlock-alt"></i></span>
 							</span>	
 							<span class="error_next_box">
@@ -355,9 +355,9 @@
 						<div class="join_row"><h3 class="join_title"><label for="email">이메일</label></h3></div>
 
 						<div id="email_wrap">
-							<input type="text" id="email" placeholder="email 주소." class="info_input email_id" name="email">
+							<input type="text" id="email_id" placeholder="email 주소." class="info_input email" name="email_id">
 							<span> @ </span>
-							<input type="text" placeholder="URL" id="url" class="info_input email_url" name="url">
+							<input type="text" placeholder="URL" id="url" class="info_input email_url" name="email_url">
 							<div class="join_div sel_url">
 								<select id="selmail" class="info_input">
 									<option value="directVal" selected="selected">직접입력</option>
@@ -366,6 +366,8 @@
 									<option value="gmail.com">구글</option>
 									<option value="nate.com">네이트</option>
 								</select>
+								<input type="hidden" id="email" name="email">
+								<span class="error"></span>
 							</div>
 						</div>
 
@@ -385,9 +387,9 @@
 
 
 		<input type="text" id="sample6_postcode postcode" class="addrbtn" readonly="readonly" placeholder="우편번호">
-		<input type="button" id="addr_btn" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-		<input type="text" id="sample6_address address" readeonly="readonly" class="addrbtn" placeholder="주소"><br>
-		<input type="text" id="sample6_detailAddress detailAddress" placeholder="상세주소">
+		<input type="button" id="addr_btn" name="zipcode" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+		<input type="text" id="sample6_address address" name="addr1" readeonly="readonly" class="addrbtn" placeholder="주소"><br>
+		<input type="text" id="sample6_detailAddress detailAddress" name="addr2" placeholder="상세주소">
 
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -488,12 +490,24 @@
 				$('#url').val(eUrl);
 				$('#url').prop('readonly', true);
 			}
-		)};
+		}
 	)};
 		
 	</script>
 	<script type="text/javascript" src="${path}/resources/js/validation.js"></script>
 	<script type="text/javascript">
+	
+		$(document).ready(function(){
+			$('.btn_type').click(function(){
+				//이메일을 합치고  input(hidden) 담아야 전송됨
+				var email_id = $('#email_id').val();
+				var email_url = $('#email_url').val();
+				var email = email_id + "@" + email_url;
+				$('#email').val(email);
+				
+				$('#frm_mem').submit();
+			});
+		});
 			//1. input에 값을 입력후 blur()하면 이벤트 발생
 			$(document).ready(function(){
 				2.// #id에  value값을 가져와 memId에 담음

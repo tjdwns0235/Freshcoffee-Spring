@@ -82,23 +82,27 @@
 				
 				<div class="header_member">
 					  <ul>
-						<li><a href="#" id="modal_open">로그인</a></li>
-						<li><a href="${path}/member/constract">회원가입</a></li>
-						<li><a href="#">정보수정</a></li>
-						<li><a href="#" class="mypage">마이페이지</a>
-							<div class="dropdown">
-							     <a href="#" >나의 주문</a>
-							     <a href="#" >장구니</a>
-							     <c:choose>
-								     <c:when test="${!empty sessionScope.loginUser}">
-									     <a href="${path}/pwUpdate.freshcoffee">비밀번호 수정</a>
-										 <a href="${path}/infoUpdate.freshcoffee">회원수정</a>
-										 <a href="${path}/dropMember.freshcoffee">회원탈퇴</a>
-									 </c:when>
-								 </c:choose>
-							</div>
-						</li>
-					</ul>
+				   <c:choose>
+					 	 <c:when test="${empty sessionScope.name}">
+							<li><a href="#" id="modal_open">로그인</a></li>
+							<li><a href="${path}/member/constract">회원가입</a></li>
+							<li><a href="#" class="mypage">마이페이지</a>
+							<li><a href="#" >장바구니</a></li>
+						 </c:when>
+						 
+					  	 <c:otherwise>
+						  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
+							<li><a href="#" class="mypage">마이페이지</a>
+								<div class="dropdown">
+								     <a href="${path}/pwUpdate.freshcoffee">비밀번호 수정</a>
+									 <a href="${path}/member/update">회원수정</a>
+									 <a href="${path}/dropMember.freshcoffee">회원탈퇴</a>
+								</div>
+							 </li>
+							<li><a href="#" >장바구니</a></li>
+						</c:otherwise>
+					</c:choose>
+					  </ul>
 				</div>
 			</div>
 		</div>
@@ -212,17 +216,17 @@
 				}
 				
 				$.ajax({
-					url: "login.freshcoffee",
+					url: "${path}/member/login",
 					type: "POST",
-					dataType: "json",
+					dataType: "text",
 					data: "id="+id+"&pw="+pw,
 					success: function(data) {
-						if(data.message == "1") {
+						if(data == "1") {
 							location.reload();			
-						} else if(data.message == "-1") {
+						} else if(data == "-1") {
 							$('#inputid').select();
 							$('.err_code').text('회원 아이디 또는 비밀번호가 일치하지 않습니다.')
-							             .css('display', 'block');
+							              .css('display', 'block');
 						}
 					},
 					error:function() {
@@ -230,6 +234,21 @@
 					}
 				});
 			});
+			
+			$(document).on('click', '.logout_btn', function(){
+				$.ajax({
+					url: "${path}/member/logout",
+					type: "POST",
+					success: function(data) {
+						location.reload();
+					},
+					error:function() {
+						alert("System Error♨");
+					}
+				});
+			});
+			
+			
 			
 			
 			$('#topBtn').click(function(event) {

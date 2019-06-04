@@ -172,7 +172,7 @@ hr {
 .dropdown > a {
 	display:none;
 }
-.mypage:hover {
+.mypage:hover .dropdown {
 	display: block;
 }
 .header_sns{

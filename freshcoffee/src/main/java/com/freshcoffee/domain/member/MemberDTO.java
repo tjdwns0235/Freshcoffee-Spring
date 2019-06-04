@@ -19,7 +19,6 @@ public class MemberDTO {
     private String name; 
     private String phone; 
     private String email; 
-    private String email_url;
     private String zipcode;
     private String addr1;
     private String addr2;

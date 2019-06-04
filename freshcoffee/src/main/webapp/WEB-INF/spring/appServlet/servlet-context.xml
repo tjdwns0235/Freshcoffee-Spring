@@ -25,5 +25,18 @@
 	</beans:bean>
 	<!-- 스프링 빈을 태그로 등록하지 않고 자동으로 검색(auto scan) --> 
 	<context:component-scan base-package="com.freshcoffee.*" /> <!--다 읽어라  -->
+	
+	<!--인터셉터 빈을 등록  -->
+	<beans:bean id="loginInterceptor" class="com.freshcoffee.interceptor.LoginInterceptor"></beans:bean>
+	
+	<!--인터셉터 호출을 위한url mapping  -->
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/pwupdate"/>
+			<mapping path="/member/update"/>
+			<mapping path="/member/delete"/>
+			<beans:ref bean="loginInterceptor"/>
+		</interceptor>
+	</interceptors>
 
 </beans:beans>

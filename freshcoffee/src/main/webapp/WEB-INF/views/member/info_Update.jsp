@@ -128,7 +128,7 @@
 			padding: 11px 14px;
 		}
 		.sel {
-			background: #fff url("images/sel_arr.gif") 100% 50% no-repeat;
+			background: #fff url("${path}/resources/img/sel_arr.gif") 100% 50% no-repeat;
 			width: 100%;
 			height: 29px;
 			font-size: 15px;
@@ -250,7 +250,7 @@
 								<label for="id">아이디</label>
 							</h3>
 							<span class="ps_box int_id">
-								<input type="text" id="id" name="id" class="int" maxlength="20">
+								<input type="text" readonly="readonly" id="id" name="id" class="int" maxlength="20" value="${one.id}">
 							</span>
 							<span class="error_next_box">
 								필수정보입니다.
@@ -267,7 +267,7 @@
 							</h3>
 							<span class="ps_box">
 								<input type="text" name="name"
-								id="name" class="int" maxlength="20">
+								id="name" class="int" maxlength="20" value="${one.name}">
 							</span>
 							<span class="error_next_box">
 								필수정보입니다.
@@ -282,7 +282,7 @@
 							</h3>
 							<span class="ps_box">
 								<input type="text" id="phone"
-								class="int" name="phone" maxlength="11">
+								class="int" name="phone" maxlength="11" value="${one.phone}">
 							</span>
 							<span class="error_next_box">
 								필수정보입니다.
@@ -415,8 +415,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function)(){
-		
-	)}
 		$('#selmail').change(function(){
 			var eUrl = $(this).val();
 			if (eUrl == 'directVal') {
@@ -428,6 +426,8 @@
 				$('#url').prop('readonly', true);
 			}
 		});
+	)};
+		
 	</script>
 	<script type="text/javascript" src="js/validation.js"></script>
 	<script type="text/javascript">
