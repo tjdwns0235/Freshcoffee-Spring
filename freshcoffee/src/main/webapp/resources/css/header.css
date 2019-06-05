@@ -168,15 +168,23 @@ hr {
 .dropdown {
 	display:flex;
 	flex-direction: column;
+	position: absolute;
+	top:35px;
+	right:300px;
+	display:none;
 }
-.dropdown > a {
+ .dropdown > a {
 	flex:1;
 	width: auto;
 	margin: 0 auto;
 	background-color: #FADAD8;
 	font-size: 20px;
 }
-
+}
+.header_member > li > #mypage:hover .dropdown{
+	display: flex;
+}
+ 
 .header_sns{
 	height: 35px;
 	float: left;
@@ -204,7 +212,7 @@ hr {
 .header_member > ul > li:hover {
 	background-color: #FFCBCB;
 	border-top: 0.1px solid white;
-	text-decoration: underline;
+	text-decoration: none;
 
 }
 #topBtn {

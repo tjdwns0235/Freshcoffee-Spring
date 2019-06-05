@@ -93,13 +93,14 @@
 							 
 						  	 <c:otherwise>
 							  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
-								<li><a href="#" class="mypage">마이페이지</a>
+								<li><a href="#" class="mypage" id="mypage">마이페이지</a></li>
 									<div class="dropdown">
 									     <a href="${path}/member/pwupdate">비밀번호 수정</a>
 										 <a href="${path}/member/update">회원수정</a>
 										 <a href="${path}/member/delete">회원탈퇴</a>
 									</div>
-								</li>
+								 </li>
+								 
 								<li><a href="#" >장바구니</a></li>
 							</c:otherwise>
 						</c:choose>
@@ -110,7 +111,7 @@
 		
 		<div class="header_logo">
 			<div class="inner_header">
-				<img src="${path}/resources/img/freshcoffee2.png" alt="로고이미지">
+				<a href="${path}/"><img src="${path}/resources/img/freshcoffee2.png" alt="로고이미지"></a>
 			</div>
 		</div>
     </header>

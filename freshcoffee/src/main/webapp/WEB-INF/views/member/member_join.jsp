@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@include file="../include/header.jsp"%>
+     <%@include file="../include/common.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="${path}/resources/css/common.css">
 	<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300&display=swap');	
 		* {
 			box-sizing: border-box;
-			font-family: 'Nanum Gothic', sans-serif;
+			font-family: 'Sunflower', sans-serif;
 		}
 		body {background: #f5f6f7;}
 		ul {list-style: none;}

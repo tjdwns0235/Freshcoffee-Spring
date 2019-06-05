@@ -9,9 +9,14 @@
 <title>Freshcoffee 회원가입</title>
 <link rel="stylesheet" href="${path}/resources/css/common.css">
 <style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap');
+	@import url('https://fonts.googleapis.com/css?family=Do+Hyeon|Sunflower:300&display=swap');	
+
 		body, h1, ul, p, h3 {
 			margin:0;
 			padding: 0;
+			font-family: 'Sunflower', sans-serif;
+			font-weight: 300;
 		}
 		body {background: #f5f6f7;}
 		.freshcoffee_logo {font-size: 2em;}
@@ -359,8 +364,8 @@
 						</li>
 				</div>
 				<div class="btn_double_area">
-					<span><a href="#" class="btn_type btn_default">비동의</a></span>
-					<span><a href="#" class="btn_type btn_agree">동의</a></span>
+					<span><a href="${path}/" class="btn_type btn_default">비동의</a></span>
+					<span><a href="${path}/member/create" class="btn_type btn_agree">동의</a></span>
 				</div>
 			</form>
 		</div>
@@ -392,7 +397,7 @@
 	</footer>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
-	/*  $(document.)ready(function(){
+	  $(document).ready(function(){
 		$("#cbox").click(function(){
 			var ckAll = $("#cbox").is(":checked");
 			if (ckALL == true) {
@@ -406,7 +411,7 @@
 				$("#err_msg").css("display" "block" "tomato");
 			}
 		});
-	});  */
+	});  
 	</script>
 
 </body>
