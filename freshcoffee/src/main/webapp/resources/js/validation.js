@@ -175,4 +175,30 @@ function ajaxCheck(memId){
 	});
 }
 
+function ajaxPwCheck(nowId, nowPw){
+	var return_val = false;
+	$.ajax({
+		url: "pwcheck?id="+nowId+'&pw='+nowPw,
+		type: "POST",
+		async : false,
+		success: function(data) {
+			console.log(data);
+			if(data == "1"){
+				$(".error_next_box").eq(0).text("비밀번호가 일치합니다")
+										  .css("display", "block")
+										  .css("color", "#0000FF");
+				return_val = true;
+			} else {
+				$(".error_next_box").eq(0).text("비밀번호가 일치하지 않습니다!")
+										  .css("display", "block")
+										  .css("color", "#FF3636");
+				
+			}
+		},
+		error: function(){
+			alert("System Error!!!");
+		}
+	});
+}
+
 	

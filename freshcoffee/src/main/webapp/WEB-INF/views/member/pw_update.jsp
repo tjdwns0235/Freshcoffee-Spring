@@ -82,7 +82,8 @@
 
 	<section>
 		<div class="pw_Update_inner_Section">
-			<form action="" method="POST" class="form">
+			<form action="${path}/member/pwupdate" method="POST" class="form" name="frm_mem">
+				<input type="hidden" name="id" >
 				<div class="join_menu">
 					<div class="join_Mini_Menu">
 						<label for="now_pw">비밀번호</label>
@@ -94,7 +95,7 @@
 				<div class="join_menu">
 					<div class="join_Mini_Menu">
 						<label for="new_pw">새로운비밀번호</label>
-						<input type="password" id="new_pw" name="new_pw" maxlength="20" class="input_box" placeholder="새로운비밀번호">
+						<input type="password" id="new_pw" name="pw" maxlength="20" class="input_box" placeholder="새로운비밀번호">
 					</div>
 					<span class="err_msg">올바른 값을 입력해주세요</span>
 				</div>
@@ -135,35 +136,32 @@
 			}
 	 	});
 	 			
-	 			$('.btn_agree').click(function(){
-	 				var postPw = $('#pw_now').val(); //현재 비밀번호의 #(ID)
-	 				var newPw = $('#inputpw').val();
-	 				
-	 				
-	 				if (!currentPw) {
-	 				// 1.현재비밀번호가 맞는지 확인
-	 					$('#pw_now').focus();
-						return false;
-					} else if (!newPwEq) {
-						$('#inputpw').focus();
-						// 2. 새비밀번호와 새비밀번호 확인 유효성 체크
-						return false;
-					} else if(postPw == newPw) {
-						// 3. 현재비밀번호와 새 비밀번호가 같으면 체크
-						//alert(postPw + "," + newPw);
-						$('#inputpw').focus();
-						$('#inputpw').next().test('현재비밀번호와 다르게 입력해주세요')
-											.css('display', 'block')
-											.css('color','tomato');
-						return false;
-					}
-	 				
+		$('.btn_agree').click(function(){
+			var postPw = $('#pw_now').val(); //현재 비밀번호의 #(ID)
+			var newPw = $('#inputpw').val();
+			
+			
+			if (!currentPw) {
+			// 1.현재비밀번호가 맞는지 확인
+				$('#pw_now').focus();
+			return false;
+		} else if (!newPwEq) {
+			$('#inputpw').focus();
+			// 2. 새비밀번호와 새비밀번호 확인 유효성 체크
+			return false;
+		} else if(postPw == newPw) {
+			// 3. 현재비밀번호와 새 비밀번호가 같으면 체크
+			//alert(postPw + "," + newPw);
+			$('#inputpw').focus();
+			$('#inputpw').next().test('현재비밀번호와 다르게 입력해주세요')
+								.css('display', 'block')
+								.css('color','tomato');
+			return false;
+		}
 	 					
-	 			
-	 				$('#frm_mem').submit();
-	 			});
-	 	});
-});
+			$('#frm_mem').submit();
+		});
+	});
 	</script>
 </body>
 </html>

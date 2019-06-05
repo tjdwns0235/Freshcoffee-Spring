@@ -241,7 +241,7 @@
 	</header>
 
 	<section>
-		<form class="join_form" method="POST" action="memberPlay.freshcoffee">
+		<form class="join_form" method="POST" action="${path}/member/update">
 			<div class="container">
 				<div class="join_content">
 					<div class="row_group">
@@ -292,9 +292,10 @@
 						<div class="join_row"><h3 class="join_title"><label for="email">이메일</label></h3></div>
 
 						<div id="email_wrap">
-							<input type="text" id="email" placeholder="email 주소." class="info_input email_id" name="email">
+							<input type="hideden" name="email">
+							<input type="text" id="email" placeholder="email 주소." class="info_input email_id" name="email_id">
 							<span> @ </span>
-							<input type="text" placeholder="URL" id="url" class="info_input email_url" name="url">
+							<input type="text" placeholder="URL" id="url" class="info_input email_url" name="email_url">
 							<div class="join_div sel_url">
 								<select id="selmail" class="info_input">
 									<option value="directVal" selected="selected">직접입력</option>
@@ -383,7 +384,7 @@
 						<div class="btn_double_area">
 							<span>
 								<a href="#" class="btn_type">
-									가입하기
+									수정하기
 								</a>
 							</span>
 						</div>
@@ -685,6 +686,14 @@
 									    .css("color", "#FF3636");
 				return false;
 				}
+			});
+			
+			$(document).on('click', '.btn_type', function(){
+				var email_id = $('#email_id').val();
+				var email_url = $('#email_url').val();
+				var email = email_id + "@" + email_url;
+				$('#email').val(email);
+				
 			});
 			
 		}); 

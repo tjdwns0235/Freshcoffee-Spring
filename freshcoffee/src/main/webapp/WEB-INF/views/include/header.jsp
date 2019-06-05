@@ -80,29 +80,30 @@
 					<a href="#"><i class="fab fa-google"></i></a>
 				</div>
 				
+				
 				<div class="header_member">
-					  <ul>
-				   <c:choose>
-					 	 <c:when test="${empty sessionScope.name}">
-							<li><a href="#" id="modal_open">로그인</a></li>
-							<li><a href="${path}/member/constract">회원가입</a></li>
-							<li><a href="#" class="mypage">마이페이지</a>
-							<li><a href="#" >장바구니</a></li>
-						 </c:when>
-						 
-					  	 <c:otherwise>
-						  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
-							<li><a href="#" class="mypage">마이페이지</a>
-								<div class="dropdown">
-								     <a href="${path}/pwUpdate.freshcoffee">비밀번호 수정</a>
-									 <a href="${path}/member/update">회원수정</a>
-									 <a href="${path}/dropMember.freshcoffee">회원탈퇴</a>
-								</div>
-							 </li>
-							<li><a href="#" >장바구니</a></li>
-						</c:otherwise>
-					</c:choose>
-					  </ul>
+					<ul>
+						<c:choose>
+					 		<c:when test="${empty sessionScope.name}">
+								<li><a href="#" id="modal_open">로그인</a></li>
+								<li><a href="${path}/member/constract">회원가입</a></li>
+								<li><a href="#" class="mypage">마이페이지</a>
+								<li><a href="#" >장바구니</a></li>
+							 </c:when>
+							 
+						  	 <c:otherwise>
+							  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
+								<li><a href="#" class="mypage">마이페이지</a>
+									<div class="dropdown">
+									     <a href="${path}/member/pwupdate">비밀번호 수정</a>
+										 <a href="${path}/member/update">회원수정</a>
+										 <a href="${path}/member/delete">회원탈퇴</a>
+									</div>
+								</li>
+								<li><a href="#" >장바구니</a></li>
+							</c:otherwise>
+						</c:choose>
+		   	    	</ul>
 				</div>
 			</div>
 		</div>

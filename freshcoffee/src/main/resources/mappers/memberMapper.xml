@@ -15,15 +15,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(#{id}, #{pw}, #{name}, #{phone}, #{email}, #{zipcode}, #{addr1}, #{addr2}, #{bir1}, #{bir2}, #{bir3})
 	</insert>
 	
+	<update id="update" parameterType="com.freshcoffee.domain.member.MemberDTO">
+		UPDATE tbl_member
+		SET		name = #{name},
+				phone = #{phone}, 
+				email = #{email},
+				zipcode = #{zipcode},
+				addr1 = #{addr1},
+				addr2 = #{addr2}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM tbl_member
+		WHERE id = #{id}
+	</delete>
+	
 	<select id="login" parameterType="com.freshcoffee.domain.member.MemberDTO" resultType="String">
 		SELECT name FROM tbl_member
 		WHERE id = #{id} AND pw = #{pw}
 	</select>
 	
-	<select id="viewMember" parameterType="" resultType="com.freshcoffee.domain.member.MemberDTO">
+	<select id="viewMember"  resultType="com.freshcoffee.domain.member.MemberDTO">
 		SELECT * FROM tbl_member
 		WHERE id = #{id}
 	</select>
+	
+	<update id="pwUpdate">
+		UPDATE tbl_member
+		SET  pw = #{pw} 
+		WHERE id = {id}
+	</update>
+	
 </mapper>
 
 

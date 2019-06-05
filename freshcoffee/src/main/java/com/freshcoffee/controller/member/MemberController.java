@@ -79,17 +79,61 @@ public class MemberController {
 		}
 	}
 	@RequestMapping(value="/update", method = RequestMethod.GET)
-	public String update(HttpSession session, Model model) {
+	public String updateview(HttpSession session, Model model) {
 		log.info(">>> 회원수정 페이지 출력");
 		MemberDTO mDto = service.viewMember(session);
 		model.addAttribute("one", mDto);
 		
 		return "member/info_Update";
 	}
+	@RequestMapping(value="/update", method = RequestMethod.POST)
+	public String updatePlay(MemberDTO mDto, HttpSession session) {
+		log.info(">>> 회원수정 액션");
+		log.info(mDto.toString()); // 데이터 받아오는지 확인
+		
+		service.update(mDto, session);
+		
+		return "redirect:/";
+	}
+	@RequestMapping(value="/pwupdate", method = RequestMethod.GET)
+	public String pwUpdateview() {
+		log.info(">>> 비밀번호수정 페이지 출력");
+		return "member/pw_update";
+	}
+	@RequestMapping(value="/pwupdate", method = RequestMethod.POST)
+	public String pwUpdatePlay(MemberDTO mDto) {
+		log.info(">>> 비밀번호수정 액션");
+		
+		service.pwUpdate(mDto);
+		
+		return "redirect:/";
+	}
+	@ResponseBody
+	@RequestMapping(value="/pwcheck", method = RequestMethod.POST)
+	public String pwCheck(MemberDTO mDto) {
+		log.info(">>> AJAX: 현재비밀번호 체크");
+		
+		String result = service.pwCheck(mDto);
+		
+		
+//		id => 현재 호그인 유저의 ID
+//		pw => 사용자가 입력한 현재 비밀번호 값
+//		DB에 등록 되있는 비밀번호 값
+		
+		return result;
+	}
 	@RequestMapping(value="/delete", method = RequestMethod.GET)
-	public String delete() {
+	public String delete(HttpSession session) {
 		log.info(">>> 회원삭제");
-		return "";
+		
+		return "member/member_delete";
+	}
+	@RequestMapping(value="/deleteplay", method = RequestMethod.POST)
+	public String deletePlay(HttpSession session) {
+		log.info(">>> 회원삭제 액션");
+		service.delete(session);
+		
+		return "redirect:/";
 	}
 
 }
