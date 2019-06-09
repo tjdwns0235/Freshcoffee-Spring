@@ -261,7 +261,7 @@
 		.address a:hover {
 			color: #a5dff9;
 		}
-		#err_msg {
+		#err_check {
 			color: tomato;
 			display:none;
 			text-align:center;
@@ -345,7 +345,7 @@
 							<div class="terms_box">
 								<div class="article">
 									<p>위치정보 이용약관에 동의하시면,<strong> 위치를 활용한 광고 정보 수신</strong> 등을<br>
-									포함하는 위치기반 서비스를 이용할 수 있습니다.</p></br>
+									포함하는 위치기반 서비스를 이용할 수 있습니다.</p><br>
 
 									<h3 class="article_title">제 1 조 (목적)</h3>
 									<p>이 약관은 주식회사가 제공하는 위치정보사업 또는<br> 위치기반서비스사업과 관련하여 회사와 개인위치정보주체와의 권리, 의<br>무 및 책임사항, 기타 필요한 사항을 규정함을 목적으로 합니다.
@@ -362,7 +362,13 @@
 								<label for="li4box" class="label1">이벤트 등 프로모션 알림 메일 수신<span class="span_select">(선택)</span></label>
 							</span>
 						</li>
+					</ul>
 				</div>
+				
+				<div id="err_check">
+					<span id="err_check_msg">FreshCoffee 이용약관과 개인정보 수집 및 이용에 대한 안내 모두 동의해주세요.</span>
+				</div>
+				
 				<div class="btn_double_area">
 					<span><a href="${path}/" class="btn_type btn_default">비동의</a></span>
 					<span><a href="${path}/member/create" class="btn_type btn_agree">동의</a></span>
@@ -398,21 +404,42 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
 	  $(document).ready(function(){
-		$("#cbox").click(function(){
-			var ckAll = $("#cbox").is(":checked");
-			if (ckALL == true) {
-				$("#cbox").prop("checked", true);
-			} else {
-				$("#cbox").prop("checked", false);
-			}
-			if(filsu1 == true && filsu2 == true) {
-				location.href = "member.freshcoffee";
+		  
+	  
+		  $('#cbox').click(function(){
+			  
+				alert("test");			  
+			  var flag = $(this).is(':checked');
+			  
+			  if(flag == true) {
+				  $('.ckboxs').prop('checked', true);
+			  } else {
+				  $('.ckboxs').prop('checked', false);
+			  }
+	  	 });
+	
+		 $('.ckboxs').click(function(){
+			var ckleng = $('.ckboxs:checkbox:checked').length;
+			
+			if(ckleng == 4) {
+				$('#cbox').prop('checked', true);
 			}else {
-				$("#err_msg").css("display" "block" "tomato");
+				$('#cbox').prop('checked', false);
 			}
-		});
-	});  
+		 });
+	
+		 $('.btn_agree').click(function() {
+			var li1box = $('#li1box').is(':checked');
+			var li2box = $('#li2box').is(':checked');
+			// alert(li1box + ", " + li2box);
+	
+			if(li1box == true && li2box == true) {
+				location.href="{path}/member/create";
+			} else {
+				$("#err_check").css("display", "block");
+				return false;
+			}
+	  });  
 	</script>
-
 </body>
 </html>

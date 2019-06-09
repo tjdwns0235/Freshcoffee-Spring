@@ -87,7 +87,7 @@
 				<div class="join_menu">
 					<div class="join_Mini_Menu">
 						<label for="now_pw">비밀번호</label>
-						<input type="password" id="now_pw" name="now_pw" maxlength="20" class="input_box" placeholder="현재비밀번호">
+						<input type="password" id="pw_now" name="now_pw" maxlength="20" class="input_box" placeholder="현재비밀번호">
 					</div>
 					<span class="err_msg">올바른 값을 입력해주세요</span>
 				</div>
@@ -95,7 +95,7 @@
 				<div class="join_menu">
 					<div class="join_Mini_Menu">
 						<label for="new_pw">새로운비밀번호</label>
-						<input type="password" id="new_pw" name="pw" maxlength="20" class="input_box" placeholder="새로운비밀번호">
+						<input type="password" id="new_pw inputpw" name="pw" maxlength="20" class="input_box" placeholder="새로운비밀번호">
 					</div>
 					<span class="err_msg">올바른 값을 입력해주세요</span>
 				</div>
@@ -117,7 +117,7 @@
 	</section>
 
 	
-	<input name="id" type="hidden" value="${sessionScope.loginUser.id}">  <!--form태그 밑에 둔다 2번째 방법  -->
+	<input name="id" type="test" value="${sessionScope.loginUser.id}">  <!--form태그 밑에 둔다 2번째 방법  -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript">
@@ -130,6 +130,7 @@
 	 		
 	 		var nowPw = $("#pw_now").val(); //입력한 비밀번호
 	 		var nowId = "${sessionScope.loginUser.id}";
+	 		alert("${sessionScope.loginUser.id}");
 	 		
 	 		if (nowPw != null || nowPw.length != 0) {
 				currentPw = ajaxPwCheck();

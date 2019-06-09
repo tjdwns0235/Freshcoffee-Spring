@@ -76,9 +76,10 @@ public class MemberServiceImpl implements MemberService {
 		String name = mDao.login(mDto);
 		String result = "-1";
 		if (name != null) {
+			log.info(name);
 			result = "1";
 		}
-		return null;
+		return result;
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+        <%@ include file="../include/common.jsp" %> 
+        <%@ include file="../include/header.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -430,7 +432,7 @@
 	)};
 		
 	</script>
-	<script type="text/javascript" src="js/validation.js"></script>
+	<script type="text/javascript" src="${path}/resources/js/validation.js"></script>
 	<script type="text/javascript">
 			//1. input에 값을 입력후 blur()하면 이벤트 발생
 			$(document).ready(function(){
@@ -606,7 +608,7 @@
 			 $('.addrbtn').click(function(){
 				 var zipcode = $('.addrbtn').eq(0).val();
 				 var addr = $('.addrbtn').eq(1).val();
-				 alert(zipcode + "," + addr);
+				 /* alert(zipcode + "," + addr); */
 				 
 				 if(zipcode == "" || addr == ""){
 					$("#addr_btn").click(); 
