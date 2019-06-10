@@ -407,8 +407,6 @@
 		  
 	  
 		  $('#cbox').click(function(){
-			  
-				alert("test");			  
 			  var flag = $(this).is(':checked');
 			  
 			  if(flag == true) {
@@ -439,7 +437,8 @@
 				$("#err_check").css("display", "block");
 				return false;
 			}
-	  });  
+	  }); 
+  });
 	</script>
 </body>
 </html>

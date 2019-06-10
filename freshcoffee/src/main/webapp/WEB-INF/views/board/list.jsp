@@ -1,6 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    <%@ include file="../include/common.jsp" %> 
+<<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -186,23 +187,24 @@
 				<div>
 					<div id="order_board">
 						<span>
-							<a href="${path}/boardList.freshcoffee?sort_type=new" id="orderNew">최신순</a>
+							<a href="${path}/board/list?sort_option=new&search_option=${map.search_option}&keyword=${map.keyword}" id="orderNew">최신순</a>
 						</span>
 						<span>
-							<a href="${path}/boardList.freshcoffee?sort_type=good" id="orderGood">추천순</a>
+							<a href="${path}/board/list?sort_option=good&search_option=${map.search_option}&keyword=${map.keyword}" id="orderGood">추천순</a>
 						</span>
 						<span>
-							<a href="${path}/boardList.freshcoffee?sort_type=reply" id="orderReply">댓글순</a>
+							<a href="${path}/board/list?sort_option=reply&search_option=${map.search_option}&keyword=${map.keyword}" id="orderReply">댓글순</a>
 						</span>
 						<span>
-							<a href="${path}/boardList.freshcoffee?sort_type=view" id="orderCnt">조회순</a>
+							<a href="${path}/board/list?sort_option=view&search_option=${map.search_option}&keyword=${map.keyword}" id="orderCnt">조회순</a>
 						</span>
 					</div>
-					
-					<div id="search_result">
-						<span class="search_span">"${keyword}</span>로 검색한 결과는 총
-						<span class="search_span">${totalCount}</span>건입니다.
-					</div>
+					<c:if test="${!empty keyword}">
+						<div id="search_result">
+							<span class="search_span">"${keyword}</span>로 검색한 결과는 총
+							<span class="search_span">${totalCount}</span>건입니다.
+						</div>
+					</c:if>
 					
 					<button id="boardAdd" class="btn btn-Primary">게시글 등록</button>
 				</div>
@@ -219,206 +221,46 @@
 						<th style="width: 60px">조회수</th>
 						<th style="width: 60px">첨부</th>
 					</tr>
-					<tr>
-						<td class="text_center" style="background-color: white;">263</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								게시판디자인하기싫다
-								<span class="replyCnt_color">1</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
+					
+					<c:forEach items="${map.list}" var="bDto">
+						<tr>
+							<jsp:useBean id="now" class="java.util.Date"/>
+							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
+							<fmt:formatDate value="${bDto.regdate}" pattern=""/>
+							<td class="text_center" style="background-color: white;">${bDto.bno}</td>
+							<td style="background-color: white;" class="title_table">
+								<a href="#">
+									${bDto.title}
+									<span class="replyCnt_color">${bDto.replycnt > 0}</span>
+									<span class="new_Time">New</span>
+								</a>
+							</td>
+							<td style="background-color: white;">${bDto.writer}</td>
+							<td style="background-color: white;" class="text_center">
+								${bDto == regdate}
+							</td>
+							<td style="background-color: white;" class="text_center">
+								<span>
+									<i class="fa fa-heart">
+									</i>
+									${bDto.goodcnt}
+								</span>
+							</td>
+							<td style="background-color: white;" class="text_center">${bDto.viewcnt}</td>
+							<td style="background-color: white;" class="text_center"></td>
+						</tr>
+					</c:forEach>
 
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
-
-					<tr>
-						<td class="text_center" style="background-color: white;">262</td>
-						<td style="background-color: white;" class="title_table">
-							<a href="#">
-								"JAVA 너무 재밌다!"
-								<span class="replyCnt_color">2</span>
-								<span class="new_Time">new</span>
-							</a>
-						</td>
-						<td style="background-color: white;">popotaze</td>
-						<td style="background-color: white;" class="text_center">
-							"10:13:52"
-						</td>
-						<td style="background-color: white;" class="text_center">
-							<span>
-								<i class="fa fa-heart">
-								</i>
-								"0"
-							</span>
-						</td>
-						<td style="background-color: white;" class="text_center">6</td>
-						<td style="background-color: white;" class="text_center"></td>
-					</tr>
+					
 			</tbody>
 		</table>
 
 		<div id="div_search">
 			<select id="selsearch" name="selsearch">
-				<option value="1" selected="selected">제목+내용</option>
-				<option value="2">제목</option>
-				<option value="3">내용</option>
-				<option value="4">작성자</option>
+				<option value="all" selected="selected">제목+내용</option>
+				<option value="title">제목</option>
+				<option value="content">내용</option>
+				<option value="writer">작성자</option>
 			</select>
 			<input type="text" placeholder="검색할내용을 입력해주세요!" name="searchboard" id="search_board">
 			<a href="#" id="search_Btn" class="btn btn_Search">검색</a>
@@ -426,48 +268,20 @@
 
 		<div class="board_pagination">
 			<ul class="pagination">
-				<li class="active">
-					<a href="#"><i class="fas fa-angle-left"></i></a>
-				</li>
-				<li class="active">
-					<a href="#"><i class="fas fa-angle-double-left"></i></a>
-				</li>
-				<li class="active">
-					<a href="#">1</a>
-				</li>
-				<li class="active">
-					<a href="#">2</a>
-				</li>
-				<li class="active">
-					<a href="#">3</a>
-				</li>
-				<li class="active">
-					<a href="#">4</a>
-				</li>
-				<li class="active">
-					<a href="#">5</a>
-				</li>
-				<li class="active">
-					<a href="#">6</a>
-				</li>
-				<li class="active">
-					<a href="#">7</a>
-				</li>
-				<li class="active">
-					<a href="#">8</a>
-				</li>
-				<li class="active">
-					<a href="#">9</a>
-				</li>
-				<li class="active">
-					<a href="#">10</a>
-				</li>
-				<li class="active">
-					<a href="#"><i class="fas fa-angle-right"></i></a>
-				</li>
-				<li class="active">
-					<a href="#"><i class="fas fa-angle-double-right"></i></a>
-				</li>
+				<c:if test="${map.pager.curBlock > 1}">
+					<li class="active">
+						<a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" ><i></i></a>
+						<a href="${path}/board/list?curPage=${map.pager.blockBegin - 10 }&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" ><i></i></a>
+					</li>
+				</c:if>
+				
+				<c:forEach begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}" var="idx">
+					<li class="active">
+						<a href="${path}/board/list?curPages=${idx}&sort_option=${map.sort_option}&keyword=${map.keyword}"><i class="fas fa-angle-double-right"></i></a>
+						<c:out value="${map.pager.curPage == idx ? class=active: ''}"/>
+					</li>
+				</c:forEach>
+				
 			</ul>
 		</div>
 			</div>
@@ -496,7 +310,7 @@
 						location.gref ="registerView.freshcoffee"
 					}else {
 						$("#modal_all"),css("disply", "block");
-						$("#err_msg").css("display". "block").text("로그인이 필요한 서비스입니다");//로그인 창의 에러메세지에서 출력되어야 함
+						$("#err_msg").css("display", "block").text("로그인이 필요한 서비스입니다");//로그인 창의 에러메세지에서 출력되어야 함
 					}
 				},
 				error: function() {

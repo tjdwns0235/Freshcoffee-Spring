@@ -164,7 +164,7 @@
 					
 					<li><a href="#" class="li1">Q & A</a>
 						<div class="dropdown1">
-							<a href="#">Q & A</a>
+							<a href="${path}/board/list">Q & A</a>
 							<a href="#">문의하기</a>
 						</div>
 					</li>

@@ -1,4 +1,4 @@
-var joinVaildate = {
+var joinValidate = {
 		//결과메시지 출력시 사용하는 Text
 		resultCode : {
 			empty_val : {
@@ -88,7 +88,7 @@ var joinVaildate = {
 		checkId : function(memId){
 			var regEmpty = /\s/g; //공백문자
 			var reg = /[^a-z0-9-_.]+/g; //올바른 아이디 형식
-			
+			alert("test2");
 			//4.member.jsp에서 전달한 매개변수memId로 
 			//	유효성 체크 시작
 			//	1) null값 체크				if

@@ -462,17 +462,13 @@
 
 						
 
-						<div class="btn_double_area">
-							<span>
-								<a href="#" class="btn_type">
-									가입하기
-								</a>
-							</span>
-						</div>
-
-					</div>
-				</div>
-			</div>
+		<div class="btn_double_area">
+			<span>
+				<a href="#" class="btn_type">
+					가입하기
+				</a>
+			</span>
+		</div>
 	</section>
 	
 
@@ -524,82 +520,7 @@
 		uphone = $('#phone'),
 		umail = $('#email_id'),
 		uurl = $('#email_url');
-		
-		/* // input 태그에 따른 설명 띄우기
-		uid.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(0).css('display', 'block');
-		});
-		 uid.blur(function(){
-			$('.error_next_box').eq(0).css('display', 'none');
-		});
-		
-		upw.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(1).css('display', 'block');
-		});
-		
-		upw.blur(function(){
-			$('.error_next_box').eq(1).css('display', 'none');
-		}); */
-
-		/* urepw.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(2).css('display', 'block');
-		});
-		
-		urepw.blur(function(){
-			$('.error_next_box').eq(2).css('display', 'none');
-		}); 
-
-		uname.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(3).css('display', 'block');
-		});
-		
-		 uname.blur(function(){
-			$('.error_next_box').eq(3).css('display', 'none');
-		});
-		
-
-		uphone.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(5).css('display', 'block');
-		});
-		
-		 uphone.blur(function(){
-			$('.error_next_box').eq(4).css('display', 'none');
-		}); 
-
-		$('.email_wrap > #email_id').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'block');
-		}); 
-		
-		umail.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'block');
-		});
-
-		$('.email_wrap > input').blur(function(){
-			// alert('test');
-			$('.error_next_box').eq(5).css('display', 'none');
-		}); 
-
-		 $('#address').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(7).css('display', 'block');
-		}); 
-		$('#yy').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(4).css('display', 'block');
-		}); 
-
-		$('.address_wrap > input').blur(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'none');
-		});  */ 
-		
+	
 		// id
 		// 1) null
 		// 2) 공백체크
@@ -607,12 +528,13 @@
 		// 4) 중복체크
 		
 		// 1. input(#id)에 값을 입력 후 blur()하면 이벤트 발생
-		$('#id').blur(function(){
+		$(uid).blur(function(){
 			// 2. input(#id) value값을 가져와 memId에 담음
 			var memId = $.trim($('#id').val());
 			// 3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄
 			// 7. checkId() 함수를 실행 후 결과값 success_id(code, desc)를 변수 checkResult에 담음
 			var checkResult = joinValidate.checkId(memId);
+			alert("test3");
 			// 8-1(실패). code 값이 0이 아닌 경우 → 유효한 값 아님         
 			if(checkResult.code != 0) {
 				// 경고 메시지 출력
