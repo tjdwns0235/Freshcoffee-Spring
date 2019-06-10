@@ -185,7 +185,7 @@
 					<h3>Q & A</h3>
 				</div>
 				<div>
-					<div id="order_board">
+					<div id="order_board" class="array_content">
 						<span>
 							<a href="${path}/board/list?sort_option=new&search_option=${map.search_option}&keyword=${map.keyword}" id="orderNew">최신순</a>
 						</span>
@@ -199,10 +199,10 @@
 							<a href="${path}/board/list?sort_option=view&search_option=${map.search_option}&keyword=${map.keyword}" id="orderCnt">조회순</a>
 						</span>
 					</div>
-					<c:if test="${!empty keyword}">
+					<c:if test="${!empty map.keyword}">
 						<div id="search_result">
-							<span class="search_span">"${keyword}</span>로 검색한 결과는 총
-							<span class="search_span">${totalCount}</span>건입니다.
+							<span class="search_span">"${map.keyword}</span>로 검색한 결과는 총
+							<span class="search_span">${map.totalCount}</span>건입니다.
 						</div>
 					</c:if>
 					
@@ -226,18 +226,28 @@
 						<tr>
 							<jsp:useBean id="now" class="java.util.Date"/>
 							<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" var="today"/>
-							<fmt:formatDate value="${bDto.regdate}" pattern=""/>
+							<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
 							<td class="text_center" style="background-color: white;">${bDto.bno}</td>
 							<td style="background-color: white;" class="title_table">
-								<a href="#">
-									${bDto.title}
-									<span class="replyCnt_color">${bDto.replycnt > 0}</span>
-									<span class="new_Time">New</span>
-								</a>
+								<a href="#">${bDto.title}</a>
+								<c:if test="${bDto.replycnt > 0}">
+                                          <span class="replyCnt_Color">( ${bDto.replycnt} )</span>
+                                </c:if>
+                                <c:if test="${today == regdate}">
+                                      <span class="new_time">New</span>
+                                </c:if>
 							</td>
+							
 							<td style="background-color: white;">${bDto.writer}</td>
 							<td style="background-color: white;" class="text_center">
-								${bDto == regdate}
+								<c:choose>
+	                                <c:when test="${today == regdate}">
+	                                     <fmt:formatDate pattern="hh:mm:ss" value="${bDto.regdate}" />
+	                                </c:when>
+	                                <c:otherwise>
+	                                     <fmt:formatDate pattern="yyyy-MM-dd" value="${bDto.regdate}" />      
+	                                </c:otherwise>
+                                </c:choose>       
 							</td>
 							<td style="background-color: white;" class="text_center">
 								<span>
@@ -247,7 +257,11 @@
 								</span>
 							</td>
 							<td style="background-color: white;" class="text_center">${bDto.viewcnt}</td>
-							<td style="background-color: white;" class="text_center"></td>
+							<td style="background-color: white;" class="text_center">
+								<c:if test="${bDto.filesize > 0}">
+	                            	<i class="fas fa-paperclip" style="color:slateblue;"></i>
+	                            </c:if>
+                            </td>
 						</tr>
 					</c:forEach>
 
@@ -263,23 +277,23 @@
 				<option value="writer">작성자</option>
 			</select>
 			<input type="text" placeholder="검색할내용을 입력해주세요!" name="searchboard" id="search_board">
-			<a href="#" id="search_Btn" class="btn btn_Search">검색</a>
+			<div class=".search_i"><a href="#" id="search_Btn" class="btn btn_Search">검색</a></div>
 		</div>
 
 		<div class="board_pagination">
-			<ul class="pagination">
+			<ul class="pagination">	
 				<c:if test="${map.pager.curBlock > 1}">
 					<li class="active">
-						<a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" ><i></i></a>
-						<a href="${path}/board/list?curPage=${map.pager.blockBegin - 10 }&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" ><i></i></a>
+						<a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
+						<a href="${path}/board/list?curPage=${map.pager.blockBegin - 10 }&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
 					</li>
 				</c:if>
 				
 				<c:forEach begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}" var="idx">
 					<li class="active">
-						<a href="${path}/board/list?curPages=${idx}&sort_option=${map.sort_option}&keyword=${map.keyword}"><i class="fas fa-angle-double-right"></i></a>
-						<c:out value="${map.pager.curPage == idx ? class=active: ''}"/>
-					</li>
+						<a href="${path}/board/list?curPage=${idx}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}"><i class="fas fa-angle-double-right"></i></a>
+						<c:out value="${map.pager.curPage == idx ? 'class=active:' ''}"/>${idx}
+					</li>	
 				</c:forEach>
 				
 			</ul>
@@ -289,36 +303,74 @@
 	</section>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
-	$(document).on("click", "#search_Btn", function(){
-		var search_option = $('#selsearch').val();
-		var keyword = $.trim($('#search_board').val());
-		alert(search_option + "," + keyword);
-		
-		if (keyword == null || keyword.length == 0) {
-			$('#search_board').focus();
-			$('#search_board').css('border', '1px solid rgb(231,2)')
-			return false;
-		}
-		location.href="${path}/boardList.freshcoffee?search_option="+search_option+"&keyword="+keyword;
-		$("#boardAdd").on("click", function(){
-			$.ajax({
-				url: "registerAjax.freshcoffee",
-				type: "POST",
-				dataType: "json",
-				success: function() {
-					if (data.message == "1") {
-						location.gref ="registerView.freshcoffee"
-					}else {
-						$("#modal_all"),css("disply", "block");
-						$("#err_msg").css("display", "block").text("로그인이 필요한 서비스입니다");//로그인 창의 에러메세지에서 출력되어야 함
-					}
-				},
-				error: function() {
-					slert("System Error!!");
-				}
-			});
-		});
-	});
+$(document).ready(function() {             
+    
+    var sort_option = "${map.sort_option}";
+    $('.array_content > a').css("color", "black").css("font-weight", "300");
+    if(sort_option == "new"){
+         $('#orderNew').css("color", "red").css("font-weith", "600");
+    } else if(sort_option == "good"){
+         $('#orderGood').css("color", "red").css("font-weith", "600");
+    } else if(sort_option == "reply"){
+         $('#orderReply').css("color", "red").css("font-weith", "600");
+    } else if(sort_option == "view"){
+         $('#orderCnt').css("color", "red").css("font-weith", "600");
+    }
+    
+    $('.search_i').click(function(event) {
+         var search_option = $('#selsearch	').val();
+         var keyword = $.trim($('#search_board').val());
+         /* alert(search_option + ", " + keyword); */
+         
+         if(keyword == null || keyword.length == 0){
+               $('#search_board').focus();
+               return false;
+         }
+         location.href="${path}/board/list?search_option="+search_option+"&keyword="+keyword;
+    });
+    
+/*              $('#input_search').focus(function(event) {
+         $('.board_search_bar').css('width', '400px')
+                                      .css('background-color', 'white')
+                                      .css('transition', '.7s');
+         $('#input_search').css('background-color', 'white')
+                                .css('transition', '.7s');
+    });
+    $('#input_search').blur(function(event) {
+         $('.board_search_bar').css('width', '120px')
+                                      .css('background-color', '#f8f8f8')
+                                      .css('transition', '.7s');
+         $('#input_search').css('background-color', '#f8f8f8')
+                                 .css('transition', '.7s')
+                                 .val("");
+    }); */
+    $('#boardAdd').click(function(event) {
+         
+         $.ajax({
+               type:"POST",
+               url: "registerAjax.makefree",
+               dataType: "json",
+               success:function(data){
+                    if(data.message == "login"){
+                         location.href = "registerView.makefree";
+                    }else if(data.message == "nologin") {
+                         
+                         $('#modal').css('display', 'flex');
+                         $('#inputid').focus();
+                         $('.err_code').last().css('display','block')
+                                                     .css('color', '#ff1616')
+                                                    .text('로그인이 필요합니다.');
+                    }
+                    
+               },
+               error: function(){
+                    alert("System Error!!!")
+               }
+         });
+    });
+    
+    
+});
 </script>
 </body>
 </html>

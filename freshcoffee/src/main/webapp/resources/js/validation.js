@@ -88,7 +88,6 @@ var joinValidate = {
 		checkId : function(memId){
 			var regEmpty = /\s/g; //공백문자
 			var reg = /[^a-z0-9-_.]+/g; //올바른 아이디 형식
-			alert("test2");
 			//4.member.jsp에서 전달한 매개변수memId로 
 			//	유효성 체크 시작
 			//	1) null값 체크				if
@@ -121,20 +120,34 @@ var joinValidate = {
 			// id에 값이 있는 경우에만 ajax 동작!
 		},
 			
-			checkPw : function(memPw,memRpw){
-				var regEmpty = /\s/g; //공백문자
-				var pwReg = RegExp(/^[a-zA=Z0-9]{4,12}$/); //비밀번호 체크
-				
-				if(memPw == "" || memPw.length == 0 ){
-					return this.resultCode.empty_val;
-				} else if(memPw.match(regEmpty)){
-					return this.resultCode.space_length_val;
-				}else if(!pwReg.test(memPw)){
-					return this.resultCode.invalid_pw;
-				}else {					
-					return this.resultCode.success_pw;
-				}
+		checkPw : function(memPw, memRpw) {
+			var regEmpty = /\s/g;
+			var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			
+			if(memPw == "" || memPw.length == 0) {
+				return this.resultCode.empty_val;
+			} else if(memPw.match(regEmpty)) {
+				return this.resultCode.space_length_val;
+			} else if(!pwReg.test(memPw)) {
+				return this.resultCode.invalid_pw;
+			} else {
+				return this.resultCode.success_pw;
 			}
+		},
+		checkRpw : function(memPw, memRpw) {
+			var regEmpty = /\s/g;
+			var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			
+			if(memRpw == "" || memRpw.length == 0) {
+				return this.resultCode.empty_val;
+			} else if(memRpw.match(regEmpty)) {
+				return this.resultCode.space_length_val;
+			} else if(!pwReg.test(memRpw)) {
+				return this.resultCode.invalid_pw;
+			} else {
+				return this.resultCode.success_pw;
+			}
+		}
 		}
 
 

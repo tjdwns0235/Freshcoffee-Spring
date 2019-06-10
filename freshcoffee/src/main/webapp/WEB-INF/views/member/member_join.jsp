@@ -534,7 +534,6 @@
 			// 3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄
 			// 7. checkId() 함수를 실행 후 결과값 success_id(code, desc)를 변수 checkResult에 담음
 			var checkResult = joinValidate.checkId(memId);
-			alert("test3");
 			// 8-1(실패). code 값이 0이 아닌 경우 → 유효한 값 아님         
 			if(checkResult.code != 0) {
 				// 경고 메시지 출력
@@ -556,14 +555,14 @@
 		});
 		
 		// pw
-		// 1) null
+		// 1) null	
 		// 2) 공백체크
 		// 3) 정규식
 		
 		$('#pw').blur(function(){
 			var memPw = $.trim($('#pw').val());
-			var memRepw = $.trim($('#pwd2').val());
-			var checkResult = joinValidate.checkPw(memPw, memRepw);
+			var memRpw = $.trim($('#pwd2').val());
+			var checkResult = joinValidate.checkPw(memPw, memRpw);
 			
 			if(checkResult.code != 0) {
 				$('error_next_box').eq(1).text(checkResult.desc)
@@ -574,8 +573,8 @@
 				$('error_next_box').eq(1).text(checkResult.desc)
 								   .css('display', 'block')
 								   .css('color', 'dodgerblue');
-				if(memRepw != "" || memRepw.length != 0) {	
-					if(memPw == memRepw) {
+				if(memRpw != "" || memRpw.length != 0) {	
+					if(memPw == memRpw) {
 						$('error_next_box').eq(2).text("비밀번호가 일치합니다.")
 						  				   .css('display', 'block')
 						  				   .css('color', 'dodgerblue');
