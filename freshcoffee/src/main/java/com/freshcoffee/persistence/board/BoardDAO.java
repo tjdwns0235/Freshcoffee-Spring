@@ -13,7 +13,7 @@ public interface BoardDAO {
 	public BoardDTO read(int bno); // 상세 게시글
 	public List<BoardDTO>	listAll(String sort_option, String search_option, String keyword, int start, int end);//게시글 목록
 //	조회수 증가 처리
-	public void increaseViewCnt(int bno, HttpSession session);
+	public void increaseViewCnt(int bno);
 //	레코드 갯수 계산
 	public int countArticle(String search_option, String keyword);
 }

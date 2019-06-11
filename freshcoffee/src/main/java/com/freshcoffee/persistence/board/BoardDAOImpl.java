@@ -20,6 +20,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
 	@Inject
 	private SqlSession sqlSession;
+	
 
 	@Override
 	public void create(BoardDTO bDto) {
@@ -41,8 +42,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public BoardDTO read(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("board.read", bno);
 	}
 
 	@Override
@@ -53,18 +53,17 @@ public class BoardDAOImpl implements BoardDAO {
 		map.put("keyword", "%"+keyword+"%");
 		map.put("start", start);
 		map.put("end", end);
-		return sqlSession.selectList("board.listAll",map);
+		return sqlSession.selectList("board.listAll" , map);
 	}
 
 	@Override
-	public void increaseViewCnt(int bno, HttpSession session) {
-		// TODO Auto-generated method stub
-		
+	public void increaseViewCnt(int bno) {
+		sqlSession.update("board.increaseViewCnt", bno);
 	}
 
 	@Override
 	public int countArticle(String search_option, String keyword) {
-		Map<String, String> map = new HashMap<>();
+		Map<String, String> map = new HashMap<>(); // Map<String, String> 키, 벨류 페어라고 한다
 		map.put("search_option", search_option);
 		map.put("keyword", "%"+keyword+"%");
 		log.info("검색옵션"+ map.get("search_option"));

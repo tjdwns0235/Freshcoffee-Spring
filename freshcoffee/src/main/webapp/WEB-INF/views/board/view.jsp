@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Q & A 상세게시판</title>
-<script type="text/javascript" src="${path}/smarteditor/service/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path}/resources/smarteditor/service/js/HuskyEZCreator.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <style type="text/css">
 	a {text-decoration: none;}
@@ -454,8 +454,8 @@
 		function comment_list() {
 			/* alert("test"); */
 			$.ajax ({
-				type:"post",
-				url: "commentlist.freshcoffee",
+				type:"GET",
+				url: "${path}/reply/list?bno=${one.bno}",
 				data: "bno=${one.bno}",
 				success: function(result) {
 					$("#commentList").html(result);

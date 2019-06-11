@@ -229,7 +229,7 @@
 							<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
 							<td class="text_center" style="background-color: white;">${bDto.bno}</td>
 							<td style="background-color: white;" class="title_table">
-								<a href="#">${bDto.title}</a>
+								<a href="${path}/board/view?bno=${bDto.bno}">${bDto.title}</a>
 								<c:if test="${bDto.replycnt > 0}">
                                           <span class="replyCnt_Color">( ${bDto.replycnt} )</span>
                                 </c:if>
@@ -318,7 +318,7 @@ $(document).ready(function() {
     }
     
     $('.search_i').click(function(event) {
-         var search_option = $('#selsearch	').val();
+         var search_option = $('#selsearch').val();
          var keyword = $.trim($('#search_board').val());
          /* alert(search_option + ", " + keyword); */
          

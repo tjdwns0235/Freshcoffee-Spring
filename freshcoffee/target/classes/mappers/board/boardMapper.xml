@@ -63,4 +63,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM tbl_board b, tbl_member m
 		<include refid="search"/>
 	</select>
+	
+	<select id="read" resultType="com.freshcoffee.domain.board.BoardDTO">
+		SELECT * FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	<update id="increaseViewCnt">
+		UPDATE tbl_board SET
+			viewcnt = viewcnt + 1
+		WHERE bno = #{bno}
+	</update>
 </mapper>

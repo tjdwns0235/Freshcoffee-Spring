@@ -28,7 +28,7 @@
 				<div class="reply_List">
 					<div class="reply_line1" style="width: 600px;">
 						<a href="#" class="replay_writer">작성자:${replyview.writer}</a>
-						<c:if test="${sessionScope.loginUser.id == replyview.writer}">
+						<c:if test="${sessionScope.userid == replyview.writer}">
 							<a class="reply_del" data_num="${replyview.rno}">삭제</a>
 						</c:if> 
 						<span id="replyList_Date">
@@ -38,7 +38,7 @@
 			</c:forEach>
 					
 			<c:choose>		
-		 		<c:when test="${empty sessionScope.loginUser}">
+		 		<c:when test="${empty sessionScope.userid}">
 					<div class="reply_login" id="reply_nologin">
 						<span class="reply_nologin_span">
 							<a href="#" class="reply_logina">로그인</a>
@@ -62,17 +62,17 @@
 							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
 							 elPlaceHolder: "replyInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEdit",
+							 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
 							 fCreator: "createSEditor2"
 							});
 						</script>
 						<a class="reply_btn">댓글 동록</a>
-						
-						<input type="hidden" name="re_writer" value="${sessionScope.loginUser.id}">
+							
+						<input type="hidden" name="re_writer" value="${sessionScope.userid}">
 						<input type="hidden" name="re_bno" id="re_bno">
 					</div>
 				</div>
-			</form>
+					</form>
 		</div>
 		
 		

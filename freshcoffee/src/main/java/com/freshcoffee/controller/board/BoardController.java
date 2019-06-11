@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -62,5 +64,17 @@ public class BoardController {
 //		model.addAttribute("map", map);
 //		return "board/list";
 		return mav;
+	}
+	
+	@RequestMapping(value = "view", method=RequestMethod.GET)
+	public String view(int bno, Model model, HttpSession session) {
+		log.info("상세 게시글 출력");
+//		조회수 증가 처리
+		service.increaseViewCnt(bno, session);
+		
+		BoardDTO bDto = service.read(bno);
+		model.addAttribute("one", bDto);
+		
+		return "board/view";
 	}
 }
