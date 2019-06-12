@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ inclue file="../include/header.jsp" %>   --%>  
+ <%@ include file="../include/header.jsp" %>  
 <%
     String referer = request.getHeader("referer");
 %>
@@ -9,7 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Q & A 상세게시판</title>
-<script type="text/javascript" src="${path}/smarteditor/service/js/HuskyEZCreator.js" charset="utf-8"></script>
+<script type="text/javascript" src="${path}/resources/smarteditor/service/js/HuskyEZCreator.js" charset="utf-8"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 <style type="text/css">
 	a {text-decoration: none;}
@@ -431,10 +431,11 @@
 	
 	history.pushState(null, document.title, location.href);
 	window.addEventListener('popstate', function(event){
-		history.pushState(null, document.title, '<%@=referer%>');
-		location.reload(); // 리프레쉬
+		history.pushState(null, document.title, '<%=referer%>');
+		location.reload(); // 리프레쉬 -
 	});
 	$(document).ready(function(){
+		
 		/*문서가 준비되면 댓글 목록을 조회하는 ajax 실행  */
 		comment_list();
 		
@@ -453,10 +454,10 @@
 		
 		function comment_list() {
 			/* alert("test"); */
+			alert("test2");
 			$.ajax ({
-				type:"post",
-				url: "commentlist.freshcoffee",
-				data: "bno=${one.bno}",
+				type:"GET",
+				url: "${path}/reply/list?bno=${one.bno}",
 				success: function(result) {
 					$("#commentList").html(result);
 				}
@@ -476,7 +477,7 @@
 				var bno = '${one.bno}';
 				$('#re_bno').val(bno);
 				$.ajax({
-					url: "replyAdd.freshcoffee",
+					url: "${path}/reply/create",
 					type: "POST",
 					data: $("#frm_reply").serialize(),
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -499,7 +500,7 @@
 		var bno = "${one.bno}";
 		
 		$.ajax({
-			url: "replyRemove.freshcoffee",
+			url: "${path}/reply/delete",
 			data: "rno=" + rno + "&bno=" + bno,
 			success: function(result) {
 				comment_list();

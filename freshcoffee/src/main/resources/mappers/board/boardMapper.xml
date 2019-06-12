@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+	<!--게시글 목록 출력  -->
+	<select id="listAll" resultType="com.freshcoffee.domain.board.BoardDTO">
+		<include refid="paging_header"/>
+		SELECT bno, title, content, writer, m.id, viewcnt, replycnt, goodcnt, b.regdate
+		FROM tbl_board b, tbl_member m
+		<include refid="search"/>
+		<if test="sort_option == 'new'">
+			ORDER BY bno DESC
+		</if>
+		<if test="sort_option == 'good'">
+			ORDER BY goodcnt DESC
+		</if>
+		<if test="sort_option == 'reply'">
+			ORDER BY replycnt DESC, bno DESC
+		</if>
+		<if test="sort_option == 'view'">
+			ORDER BY viewcnt DESC
+		</if>
+		<include refid="paging_footer"/>
+	</select>
+	<sql id="paging_header">
+		SELECT *
+		FROM (
+			SELECT rownum AS rnum, A.*
+			FROM (
+	</sql>
+	<sql id="paging_footer">
+			) A
+		 ) WHERE rnum BETWEEN #{start} AND #{end}
+	</sql>
+	
+	<sql id="search">
+		<choose>
+			<when test="search_option != 'all'">
+				WHERE b.writer = m.id
+				<if test="search_option == 'title">
+					AND title LIKE #{keyword}
+				</if>
+				<if test="search_option == 'writer">
+					AND writer LIKE #{keyword}
+				</if>
+				<if test="search_option == 'content">
+					AND content LIKE #{keyword}
+				</if>
+			</when>
+			<otherwise>
+				WHERE b.writer = m.id
+				AND (writer LIKE #{keyword}
+					 OR title LIKE #{keyword}
+					 OR content LIKE #{keyword} )
+			</otherwise>
+		</choose>
+	</sql>
+	
+	<!--레코드 갯수 계산  -->
+	<select id="countArticle" resultType="int">
+		SELECT COUNT(*)
+		FROM tbl_board b, tbl_member m
+		<include refid="search"/>
+	</select>
+	
+	<select id="read" resultType="com.freshcoffee.domain.board.BoardDTO">
+		SELECT * FROM tbl_board
+		WHERE bno = #{bno}
+	</select>
+	
+	<!--조회수 +1 증가  -->
+	<update id="increaseViewCnt">
+		UPDATE tbl_board SET
+			viewcnt = viewcnt + 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<!--해당게시글 replycnt +1, -1  -->
+	<update id="updateReplyCnt">
+		UPDATE tbl_board SET
+		<if test="flag == 'plus'">
+			replycnt = replycnt+1
+		</if>
+		<if test="flag == 'minus'">
+			replycnt = replycnt-1
+		</if>
+		WHERE bno = #{bno}
+	</update>
+</mapper>

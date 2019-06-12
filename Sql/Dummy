@@ -1,3 +1,4 @@
+
 -- 프로젝트  Dummy 데이터 생성 --
 -- 상품 SEQUENCE
 DROP SEQUENCE seq_product;
@@ -94,7 +95,7 @@ CREATE TABLE tbl_board(
     content VARCHAR2(4000) NOT NULL,
     writer VARCHAR2(30) NOT NULL,
     viewcnt NUMBER DEFAULT 0,
-    reply NUMBER DEFAULT 0,
+    replycnt NUMBER DEFAULT 0,
     goodcnt NUMBER DEFAULT 0,
     regdate DATE DEFAULT SYSDATE,
     filename VARCHAR2 (100),
@@ -106,23 +107,23 @@ START WITH 1
 INCREMENT BY 1;
 
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user01');
+VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user1');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'안녕', ' 부탁드려요', 'user02');
+VALUES(seq_board.NEXTVAL,'안녕', ' 부탁드려요', 'user2');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'HI', '잘 부탁드려요', 'user03');
+VALUES(seq_board.NEXTVAL,'HI', '잘 부탁드려요', 'user3');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user04');
+VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user4');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user05');
+VALUES(seq_board.NEXTVAL,'안녕하세요', '잘 부탁드려요', 'user5');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'잘 지내시나요', '잘 부탁드려요', 'user06');
+VALUES(seq_board.NEXTVAL,'잘 지내시나요', '잘 부탁드려요', 'user6');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'HELLO', '잘 부탁드려요', 'user07');
+VALUES(seq_board.NEXTVAL,'HELLO', '잘 부탁드려요', 'user7');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'반가워요', '잘 부탁드려요', 'user08');
+VALUES(seq_board.NEXTVAL,'반가워요', '잘 부탁드려요', 'user8');
 INSERT INTO tbl_board(bno, title, content, writer)
-VALUES(seq_board.NEXTVAL,'안녕하십니까', '잘 부탁드려요', 'user09');
+VALUES(seq_board.NEXTVAL,'안녕하십니까', '잘 부탁드려요', 'user9');
 INSERT INTO tbl_board(bno, title, content, writer)
 VALUES(seq_board.NEXTVAL,'안녕', '잘 부탁드려요', 'user10');
 
@@ -151,7 +152,34 @@ SELECT * FROM tbl_board;
 SELECT * FROM tbl_reply;
 
 
-INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user01' ,'9');
-INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user02' ,'10');
-INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user03' ,'10');
-INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user04' ,'9');
+INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user1' ,'9');
+INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user2' ,'10');
+INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user3' ,'10');
+INSERT INTO tbl_reply(rno, content, writer, bno) VALUES(seq_reply.NEXTVAL, '안녕하세요1', 'user4' ,'9');
+
+
+SELECT *
+FROM (SELECT * FROM tbl_product
+      ORDER BY p_good DESC)
+WHERE rownum <= 3;
+  
+SELECT *
+FROM (SELECT rownum AS rnum, A.*
+			FROM ( SELECT bno, title, content, writer, m.id, viewcnt, replycnt, goodcnt, b.regdate
+            FROM tbl_board b, tbl_member m
+				WHERE b.writer = m.id
+				AND (writer LIKE '%%'
+					 OR title LIKE '%%'
+					 OR content LIKE '%%' )
+                     ORDER BY bno DESC
+                 ) A
+     ) WHERE rnum BETWEEN 1 AND 10
+			
+		
+
+
+
+
+
+
+

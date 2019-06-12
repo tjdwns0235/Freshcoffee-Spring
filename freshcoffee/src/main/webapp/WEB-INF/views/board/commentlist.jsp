@@ -28,7 +28,7 @@
 				<div class="reply_List">
 					<div class="reply_line1" style="width: 600px;">
 						<a href="#" class="replay_writer">작성자:${replyview.writer}</a>
-						<c:if test="${sessionScope.loginUser.id == replyview.writer}">
+						<c:if test="${sessionScope.userid == replyview.writer}">
 							<a class="reply_del" data_num="${replyview.rno}">삭제</a>
 						</c:if> 
 						<span id="replyList_Date">
@@ -38,7 +38,7 @@
 			</c:forEach>
 					
 			<c:choose>		
-		 		<c:when test="${empty sessionScope.loginUser}">
+		 		<c:when test="${empty sessionScope.userid}">
 					<div class="reply_login" id="reply_nologin">
 						<span class="reply_nologin_span">
 							<a href="#" class="reply_logina">로그인</a>
@@ -46,33 +46,38 @@
 						</span>
 					</div>
 				</c:when>
-			</c:choose>	
-				<div class="reply_line2">
-					<div class="replyList_textarea" id="replyList_textarea">
-					${replyview.content}
+			
+				<otherwise>
+					<div class="reply_line2">
+						<div class="replyList_textarea" id="replyList_textarea">
+						${replyview.content}
+						</div>
 					</div>
-				</div>
+				
+			
 					
 					
-					<form action="replyAdd.freshcoffee" method="POST" name="frm_reply" id="frm_reply">
+					<form action="${path}/reply/create" method="POST" name="frm_reply" id="frm_reply">
 					<div class="reply_btn">
-						<textarea rows="" cols="150" id="replyInsert" name="re_textarea" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
+						<textarea rows="" cols="150" id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
 						<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
 							 elPlaceHolder: "replyInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEdit",
+							 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
 							 fCreator: "createSEditor2"
 							});
 						</script>
 						<a class="reply_btn">댓글 동록</a>
-						
-						<input type="hidden" name="re_writer" value="${sessionScope.loginUser.id}">
+							
+						<input type="hidden" name="writer" value="${sessionScope.userid}">
 						<input type="hidden" name="re_bno" id="re_bno">
 					</div>
+				</otherwise>
+			</c:choose>	
 				</div>
-			</form>
+					</form>
 		</div>
 		
 		

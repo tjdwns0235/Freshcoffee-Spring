@@ -93,7 +93,7 @@
 							 
 						  	 <c:otherwise>
 							  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
-								<li><a href="#" class="mypage" id="mypage">마이페이지</a></li>
+								<li><a href="#" class="mypage" id="mypage">마이페이지</a>
 									<div class="dropdown">
 									     <a href="${path}/member/pwupdate">비밀번호 수정</a>
 										 <a href="${path}/member/update">회원수정</a>
@@ -164,7 +164,7 @@
 					
 					<li><a href="#" class="li1">Q & A</a>
 						<div class="dropdown1">
-							<a href="#">Q & A</a>
+							<a href="${path}/board/list">Q & A</a>
 							<a href="#">문의하기</a>
 						</div>
 					</li>

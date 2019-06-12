@@ -47,7 +47,6 @@
 			display: block;
 			width: 327px;
 			height: 147px;
-			background: url('img/freshcoffee2.png');
 			margin: auto auto;
 		}
 
@@ -226,7 +225,7 @@
 			height: 100%;
 			width: 105px;
 		}
-		#email, #selmail, #url {
+		#email, #selmail, #email_url{
 			height: 31px; 
 		}
 		
@@ -372,7 +371,7 @@
 						<div id="email_wrap">
 							<input type="text" id="email_id" placeholder="email 주소." class="info_input email" name="email_id">
 							<span> @ </span>
-							<input type="text" placeholder="URL" id="url email_url" class="info_input email_url" name="email_url">
+							<input type="text" id="email_url" class="info_input email_url" name="email_url" placeholder="이메일선택">
 							<div class="join_div sel_url">
 								<select id="selmail" class="info_input">
 									<option value="directVal" selected="selected">직접입력</option>
@@ -408,71 +407,13 @@
 		</form>
 		
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-    function sample6_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var addr = ''; // 주소 변수
-                var extraAddr = ''; // 참고항목 변수
-
-                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-                    addr = data.roadAddress;
-                } else { // 사용자가 지번 주소를 선택했을 경우(J)
-                    addr = data.jibunAddress;
-                }
-
-                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-                if(data.userSelectedType === 'R'){
-                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있고, 공동주택일 경우 추가한다.
-                    if(data.buildingName !== '' && data.apartment === 'Y'){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-                    if(extraAddr !== ''){
-                        extraAddr = ' (' + extraAddr + ')';
-                    }
-                    // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("sample6_extraAddress").value = extraAddr;
-                
-                } else {
-                    document.getElementById("sample6_extraAddress").value = '';
-                }
-
-                // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('sample6_postcode').value = data.zonecode;
-                document.getElementById("sample6_address").value = addr;
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("sample6_detailAddress").focus();
-            }
-        }).open();
-    }
-</script>
-
-						
-
-						<div class="btn_double_area">
-							<span>
-								<a href="#" class="btn_type">
-									가입하기
-								</a>
-							</span>
-						</div>
-
-					</div>
-				</div>
-			</div>
+		<div class="btn_double_area">
+			<span>
+				<a href="#" class="btn_type">
+					가입하기
+				</a>
+			</span>
+		</div>
 	</section>
 	
 
@@ -494,23 +435,7 @@
 			</div>
 		</div>
 	</footer>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function)(){
-		$('#selmail').change(function(){
-			var eUrl = $(this).val();
-			if (eUrl == 'directVal') {
-				$('#url').val('');
-				$('#url').focus();
-				$('#url').removeAttr('readonly');
-			} else {
-				$('#url').val(eUrl);
-				$('#url').prop('readonly', true);
-			}
-		}
-	)};
-		
-	</script> -->
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="${path}/resources/js/validation.js"></script>
 	<script type="text/javascript">
 	$(document).ready(function(){
@@ -524,82 +449,7 @@
 		uphone = $('#phone'),
 		umail = $('#email_id'),
 		uurl = $('#email_url');
-		
-		/* // input 태그에 따른 설명 띄우기
-		uid.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(0).css('display', 'block');
-		});
-		 uid.blur(function(){
-			$('.error_next_box').eq(0).css('display', 'none');
-		});
-		
-		upw.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(1).css('display', 'block');
-		});
-		
-		upw.blur(function(){
-			$('.error_next_box').eq(1).css('display', 'none');
-		}); */
-
-		/* urepw.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(2).css('display', 'block');
-		});
-		
-		urepw.blur(function(){
-			$('.error_next_box').eq(2).css('display', 'none');
-		}); 
-
-		uname.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(3).css('display', 'block');
-		});
-		
-		 uname.blur(function(){
-			$('.error_next_box').eq(3).css('display', 'none');
-		});
-		
-
-		uphone.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(5).css('display', 'block');
-		});
-		
-		 uphone.blur(function(){
-			$('.error_next_box').eq(4).css('display', 'none');
-		}); 
-
-		$('.email_wrap > #email_id').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'block');
-		}); 
-		
-		umail.focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'block');
-		});
-
-		$('.email_wrap > input').blur(function(){
-			// alert('test');
-			$('.error_next_box').eq(5).css('display', 'none');
-		}); 
-
-		 $('#address').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(7).css('display', 'block');
-		}); 
-		$('#yy').focus(function(){
-			// alert('test');
-			$('.error_next_box').eq(4).css('display', 'block');
-		}); 
-
-		$('.address_wrap > input').blur(function(){
-			// alert('test');
-			$('.error_next_box').eq(6).css('display', 'none');
-		});  */ 
-		
+	
 		// id
 		// 1) null
 		// 2) 공백체크
@@ -607,7 +457,7 @@
 		// 4) 중복체크
 		
 		// 1. input(#id)에 값을 입력 후 blur()하면 이벤트 발생
-		$('#id').blur(function(){
+		$(uid).blur(function(){
 			// 2. input(#id) value값을 가져와 memId에 담음
 			var memId = $.trim($('#id').val());
 			// 3. joinValidate의 checkId() 함수를 실행, memId를 매개변수로 보냄
@@ -634,31 +484,31 @@
 		});
 		
 		// pw
-		// 1) null
+		// 1) null	
 		// 2) 공백체크
 		// 3) 정규식
 		
 		$('#pw').blur(function(){
 			var memPw = $.trim($('#pw').val());
-			var memRepw = $.trim($('#pwd2').val());
-			var checkResult = joinValidate.checkPw(memPw, memRepw);
+			var memRpw = $.trim($('#pwd2').val());
+			var checkResult = joinValidate.checkPw(memPw, memRpw);
 			
 			if(checkResult.code != 0) {
-				$('error_next_box').eq(1).text(checkResult.desc)
+				$('.error_next_box').eq(1).text(checkResult.desc)
 								   .css('display', 'block')
 								   .css('color', 'tomato');
 				return false;
 			} else {
-				$('error_next_box').eq(1).text(checkResult.desc)
+				$('.error_next_box').eq(1).text(checkResult.desc)
 								   .css('display', 'block')
 								   .css('color', 'dodgerblue');
-				if(memRepw != "" || memRepw.length != 0) {	
-					if(memPw == memRepw) {
-						$('error_next_box').eq(2).text("비밀번호가 일치합니다.")
+				if(memRpw != "" || memRpw.length != 0) {	
+					if(memPw == memRpw) {
+						$('.error_next_box').eq(2).text("비밀번호가 일치합니다.")
 						  				   .css('display', 'block')
 						  				   .css('color', 'dodgerblue');
 					} else {
-						$('error_next_box').eq(2).text("입력하신 비밀번호가 일치하지 않습니다.")
+						$('.error_next_box').eq(2).text("입력하신 비밀번호가 일치하지 않습니다.")
 						  				   .css('display', 'block')
 						  				   .css('color', 'tomato');
 						return false;
@@ -675,27 +525,27 @@
 		// 3) 정규식
 		// 4) pw != repw
 
-		$('#pd2w').blur(function(){
+		$('#pwd2').blur(function(){
 			var memPw = $.trim($('#pw').val());
-			var memRepw = $.trim($('#pwd2').val());
-			var checkResult = joinValidate.checkRepw(memPw, memRepw);
+			var memRpw = $.trim($('#pwd2').val());
+			var checkResult = joinValidate.checkRpw(memPw, memRpw);
 			
 			if(checkResult.code != 0) {
-				$('error_next_box').eq(2).text(checkResult.desc)
+				$('.error_next_box').eq(2).text(checkResult.desc)
 								   .css('display', 'block')
 								   .css('color', 'tomato');
 				return false;
 			} else {
-				$('error_next_box').eq(2).text(checkResult.desc)
+				$('.error_next_box').eq(2).text(checkResult.desc)
 								   .css('display', 'block')
 								   .css('color', 'dodgerblue');
 				if(memPw != "" || memPw.length != 0) {	
-					if(memPw == memRepw) {
-						$('error_next_box').eq(2).text("비밀번호가 일치합니다.")
+					if(memPw == memRpw) {
+						$('.error_next_box').eq(2).text("비밀번호가 일치합니다.")
 						  				   .css('display', 'block')  
 						  				   .css('color', 'dodgerblue');
 					} else {
-						$('error_next_box').eq(2).text("입력하신 비밀번호가 일치하지 않습니다.")
+						$('.error_next_box').eq(2).text("입력하신 비밀번호가 일치하지 않습니다.")
 						  				   .css('display', 'block') 
 						  				   .css('color', 'tomato');
 						return false;
@@ -717,27 +567,27 @@
 			var regEmpty = /\s/g;
 			
 			if(name == "" || name.length == 0) {
-				$('error_next_box').eq(3).text('필수 입력 정보입니다.')
+				$('.error_next_box').eq(3).text('필수 입력 정보입니다.')
 				   				   .css('display', 'block')
 				  				   .css('color', 'tomato');
 				return false;
 			} else if(name.match(regEmpty)) {
-				$('error_next_box').eq(3).text('공백 없이 입력해주세요.')
+				$('.error_next_box').eq(3).text('공백 없이 입력해주세요.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 		 		return false;
 			} else if(regKor.test(name)) {
-				$('error_next_box').eq(3).text('이름은 표준 한글만 입력 가능합니다.')
+				$('.error_next_box').eq(3).text('이름은 표준 한글만 입력 가능합니다.')
 								   .css('display', 'block')
 								   .css('color', 'tomato');
 				return false;
 			} else if(name.length < 2 || name.length > 4) { 
-				$('error_next_box').eq(3).text('이름은 2자 이상 4자 이하여만 합니다.')
+				$('.error_next_box').eq(3).text('이름은 2자 이상 4자 이하여만 합니다.')
 								   .css('display', 'block')
 								   .css('color', 'tomato');
 				return false;  
 			} else {
-				$('error_next_box').eq(3).text('멋진 이름이네요!')
+				$('.error_next_box').eq(3).text('멋진 이름이네요!')
 								   .css('display', 'block')
 								   .css('color', 'dodgerblue');
 			}
@@ -753,32 +603,32 @@
 			var regEmpty = /\s/g;
 			var regPhone = /^(?:(010\d{4})|(01[1|6|7|8|9]\d{3,4}))(\d{4})$/;
 			if(phone == "" || phone.length == 0) {
-				$('error_next_box').eq(4).text('필수 입력 정보입니다.')
+				$('.error_next_box').eq(5).text('필수 입력 정보입니다.')
 				   				   .css('display', 'block')
 				  				   .css('color', 'tomato');
 				return false;
 			} else if(phone.match(regEmpty)) {
-				$('error_next_box').eq(4).text('공백 없이 입력해주세요.')
+				$('.error_next_box').eq(5).text('공백 없이 입력해주세요.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 		 		return false;
 			} else if($.isNumeric(phone) == false) {
-				$('error_next_box').eq(4).text('숫자만 입력해주세요.')
+				$('.error_next_box').eq(5).text('숫자만 입력해주세요.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 				return false;
 			} else if(phone.indexOf("01") != 0) {
-				$('error_next_box').eq(4).text('휴대폰 번호가 유효하지 않습니다.')
+				$('.error_next_box').eq(5).text('휴대폰 번호가 유효하지 않습니다.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 				return false;
 			} else if(!(phone.length == 10 || phone.length == 11)) {
-				$('error_next_box').eq(4).text("'-' 없이 10, 11자로 입력해주세요.")
+				$('.error_next_box').eq(5).text("'-' 없이 10, 11자로 입력해주세요.")
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 				return false;
 			} else {
-				$('error_next_box').eq(4).text('멋진 전화번호네요!')
+				$('.error_next_box').eq(5).text('멋진 전화번호네요!')
 								   .css('display', 'block')
 								   .css('color', 'dodgerblue');
 			}		
@@ -791,29 +641,29 @@
 			var emailReg = RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
 			
 			if(email == "" || email.length == 0) {
-				$('error_next_box').eq(5).text('필수 입력 정보입니다.')
+				$('.error_next_box').eq(6).text('필수 입력 정보입니다.')
 				   				   .css('display', 'block')
 				  				   .css('color', 'tomato');
 				return false;
 			} else if(email.match(regEmpty)) {
-				$('error_next_box').eq(5).text('공백 없이 입력해주세요.')
+				$('.error_next_box').eq(6).text('공백 없이 입력해주세요.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 		 		return false;
 			} else if(url != "" || url.length != 0) {
 				var fullMail = email + "@" + url;
 				if(!emailReg.test(fullMail)) {
-					$('error_next_box').eq(5).text('올바른 이메일을 입력해주세요.')
+					$('.error_next_box').eq(6).text('올바른 이메일을 입력해주세요.')
 									   .css('display', 'block')
 									   .css('color', 'tomato');
 					return false;
 				} else {
-					$('error_next_box').eq(5).text('멋진 이메일이네요!')
+					$('.error_next_box').eq(6).text('멋진 이메일이네요!')
 									   .css('display', 'block')
 									   .css('color', 'dodgerblue');
 				}
 			} else {
-				$('error_next_box').eq(5).text('')
+				$('.error_next_box').eq(6).text('')
 				return false;
 			}
 		});
@@ -825,35 +675,37 @@
 			var emailReg = RegExp(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i);
 			
 			if(url == "" || url.length == 0) {
-				$('error_next_box').eq(5).text('필수 입력 정보입니다.')
+				$('.error_next_box').eq(7).text('필수 입력 정보입니다.')
 				   				   .css('display', 'block')
 				  				   .css('color', 'tomato');
 				return false;
 			} else if(url.match(regEmpty)) {
-				$('error_next_box').eq(5).text('공백 없이 입력해주세요.')
+				$('.error_next_box').eq(6).text('공백 없이 입력해주세요.')
 				                   .css('display', 'block')
 				                   .css('color', 'tomato');
 		 		return false;
 			} else if(email != "" || email.length != 0) {
 				var fullMail = email + "@" + url;
 				if(!emailReg.test(fullMail)) {
-					$('error_next_box').eq(5).text('올바른 이메일을 입력해주세요.')
+					$('.error_next_box').eq(6).text('올바른 이메일을 입력해주세요.')
 									   .css('display', 'block')
 									   .css('color', 'tomato');
 					return false;
 				} else {
-					$('error_next_box').eq(5).text('멋진 이메일이네요!')
+					$('.error_next_box').eq(6).text('멋진 이메일이네요!')
 									   .css('display', 'block')
 									   .css('color', 'dodgerblue');
 				}
 			} else {
-				$('error_next_box').eq(5).text('')
+				$('.error_next_box').eq(6).text('')
 				return false;
 			}
 		});
 		
+
 		$('#selmail').change(function() { 
 			var selmail = $(this).val();
+			alert(selmail);
 
 			if(selmail == 'directVal') {
 				$('#email_url').val("");
@@ -882,19 +734,69 @@
 			var dAddr = $.trim($(this).val());
 			
 			if(dAddr == "" || dAddr.length == 0) {
-				$('error_next_box').eq(6).text('필수 입력 정보입니다.')
+				$('error_next_box').eq(7).text('필수 입력 정보입니다.')
 				   				   .css('display', 'block')
 				  				   .css('color', 'tomato');
 				return false;
 			} 
 		});
 		
-		$('.joinBtn_wrap').click(function(){
+		$('.btn_type').click(function(){
 			$('#frm_mem').submit();
 			
 		});
 		
 	});
+	</script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+	<script type="text/javascript">
+		function sample6_execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
 	</script>
 
 </body>

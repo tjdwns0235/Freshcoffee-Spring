@@ -1,4 +1,4 @@
-var joinVaildate = {
+var joinValidate = {
 		//결과메시지 출력시 사용하는 Text
 		resultCode : {
 			empty_val : {
@@ -88,7 +88,6 @@ var joinVaildate = {
 		checkId : function(memId){
 			var regEmpty = /\s/g; //공백문자
 			var reg = /[^a-z0-9-_.]+/g; //올바른 아이디 형식
-			
 			//4.member.jsp에서 전달한 매개변수memId로 
 			//	유효성 체크 시작
 			//	1) null값 체크				if
@@ -121,20 +120,34 @@ var joinVaildate = {
 			// id에 값이 있는 경우에만 ajax 동작!
 		},
 			
-			checkPw : function(memPw,memRpw){
-				var regEmpty = /\s/g; //공백문자
-				var pwReg = RegExp(/^[a-zA=Z0-9]{4,12}$/); //비밀번호 체크
-				
-				if(memPw == "" || memPw.length == 0 ){
-					return this.resultCode.empty_val;
-				} else if(memPw.match(regEmpty)){
-					return this.resultCode.space_length_val;
-				}else if(!pwReg.test(memPw)){
-					return this.resultCode.invalid_pw;
-				}else {					
-					return this.resultCode.success_pw;
-				}
+		checkPw : function(memPw, memRpw) {
+			var regEmpty = /\s/g;
+			var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			
+			if(memPw == "" || memPw.length == 0) {
+				return this.resultCode.empty_val;
+			} else if(memPw.match(regEmpty)) {
+				return this.resultCode.space_length_val;
+			} else if(!pwReg.test(memPw)) {
+				return this.resultCode.invalid_pw;
+			} else {
+				return this.resultCode.success_pw;
 			}
+		},
+		checkRpw : function(memPw, memRpw) {
+			var regEmpty = /\s/g;
+			var pwReg = RegExp(/^[a-zA-Z0-9]{4,12}$/);
+			
+			if(memRpw == "" || memRpw.length == 0) {
+				return this.resultCode.empty_val;
+			} else if(memRpw.match(regEmpty)) {
+				return this.resultCode.space_length_val;
+			} else if(!pwReg.test(memRpw)) {
+				return this.resultCode.invalid_pw;
+			} else {
+				return this.resultCode.success_pw;
+			}
+		}
 		}
 
 
@@ -187,18 +200,20 @@ function ajaxPwCheck(nowId, nowPw){
 				$(".pwAjax").eq(0).text("비밀번호가 일치합니다")
 										  .css("display", "block")
 										  .css("color", "#0000FF");
-				return true;
+				 return_val = true;
 			} else {
 				$(".pwAjax").eq(0).text("비밀번호가 일치하지 않습니다!")
 										  .css("display", "block")
 										  .css("color", "#FF3636");
-				return return_val;
+				return_val = false;
 			}
 		},
 		error: function(){
 			alert("System Error!!!");
 		}
+		
 	});
+	return return_val;
 }
 
 	
