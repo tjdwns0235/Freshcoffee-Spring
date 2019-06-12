@@ -12,6 +12,10 @@
 		@import url("https://fonts.googleapis.com/css?family=Cute+Font");
 		* {
 			text-decoration: none;
+			list-style: none;
+		}
+		* ul, li {
+			padding-left:0px;
 		}
 		.bodyall {
 			width: 100%;
@@ -81,21 +85,25 @@
 			flex: 1;
 		}
 		.coffename {
-			font-size: 17px;
+			font-size: 14px;
 		}
 		.displayitem_price {
 			list-style: none;
-			font-size: 17px;
+			font-size: 13px;
 		}
 		.name a {
 			text-decoration: none;
+			width: 240px;
+			height:24px;
 		}
 		.name {
 			border-bottom: 1px solid #ddd;
 			border-bottom-width: 1px;
 			display: inline-block;
 			width: 240px;
+			height:24px;
 			margin: 0 auto;
+			font-size: 15px;
 		}
 		.click {
 			color: black;
@@ -105,6 +113,9 @@
 		}
 		.displayitem_price:hover {
 			color: #00dffc;
+		}
+		.title_displayitem * {
+		 	font-weight: 500px;
 		}
 	</style>
 </head>

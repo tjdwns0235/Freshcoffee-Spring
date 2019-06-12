@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- <%@ inclue file="../include/header.jsp" %>   --%>  
+ <%@ include file="../include/header.jsp" %>  
 <%
     String referer = request.getHeader("referer");
 %>
@@ -431,10 +431,11 @@
 	
 	history.pushState(null, document.title, location.href);
 	window.addEventListener('popstate', function(event){
-		history.pushState(null, document.title, '<%@=referer%>');
-		location.reload(); // 리프레쉬
+		history.pushState(null, document.title, '<%=referer%>');
+		location.reload(); // 리프레쉬 -
 	});
 	$(document).ready(function(){
+		
 		/*문서가 준비되면 댓글 목록을 조회하는 ajax 실행  */
 		comment_list();
 		
@@ -453,10 +454,10 @@
 		
 		function comment_list() {
 			/* alert("test"); */
+			alert("test2");
 			$.ajax ({
 				type:"GET",
 				url: "${path}/reply/list?bno=${one.bno}",
-				data: "bno=${one.bno}",
 				success: function(result) {
 					$("#commentList").html(result);
 				}

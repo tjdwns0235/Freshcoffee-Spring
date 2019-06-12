@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.freshcoffee.domain.board.ReplyDTO;
 import com.freshcoffee.persistence.board.BoardDAO;
@@ -24,7 +25,8 @@ public class ReplyServiceImpl implements ReplyService {
 	public List<ReplyDTO> list(int bno) {
 		return rDao.list(bno);
 	}
-
+	
+	@Transactional
 	@Override
 	public void create(ReplyDTO rDto) {
 //		비즈니스 로직
@@ -36,7 +38,8 @@ public class ReplyServiceImpl implements ReplyService {
 		map.put("bno", rDto.getBno());
 		bDao.updateReplyCnt(map);
 	}
-
+	
+	@Transactional
 	@Override
 	public void delete(ReplyDTO rDto) {
 //		비즈니스 로직

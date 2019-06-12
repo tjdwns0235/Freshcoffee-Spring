@@ -46,15 +46,18 @@
 						</span>
 					</div>
 				</c:when>
-			</c:choose>	
-				<div class="reply_line2">
-					<div class="replyList_textarea" id="replyList_textarea">
-					${replyview.content}
+			
+				<otherwise>
+					<div class="reply_line2">
+						<div class="replyList_textarea" id="replyList_textarea">
+						${replyview.content}
+						</div>
 					</div>
-				</div>
+				
+			
 					
 					
-					<form action="replyAdd.freshcoffee" method="POST" name="frm_reply" id="frm_reply">
+					<form action="${path}/reply/create" method="POST" name="frm_reply" id="frm_reply">
 					<div class="reply_btn">
 						<textarea rows="" cols="150" id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
 						<script type="text/javascript">
@@ -71,6 +74,8 @@
 						<input type="hidden" name="writer" value="${sessionScope.userid}">
 						<input type="hidden" name="re_bno" id="re_bno">
 					</div>
+				</otherwise>
+			</c:choose>	
 				</div>
 					</form>
 		</div>

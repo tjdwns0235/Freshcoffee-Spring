@@ -200,18 +200,20 @@ function ajaxPwCheck(nowId, nowPw){
 				$(".pwAjax").eq(0).text("비밀번호가 일치합니다")
 										  .css("display", "block")
 										  .css("color", "#0000FF");
-				return true;
+				 return_val = true;
 			} else {
 				$(".pwAjax").eq(0).text("비밀번호가 일치하지 않습니다!")
 										  .css("display", "block")
 										  .css("color", "#FF3636");
-				return return_val;
+				return_val = false;
 			}
 		},
 		error: function(){
 			alert("System Error!!!");
 		}
+		
 	});
+	return return_val;
 }
 
 	

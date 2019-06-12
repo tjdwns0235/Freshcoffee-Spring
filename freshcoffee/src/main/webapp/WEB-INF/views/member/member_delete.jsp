@@ -141,7 +141,7 @@
 			<div class="content">3. 게시물 삭제가 필요한 경우에는 <span style="color: dodgerblue;">관리자(kj1111@freshcoffee.co.kr)</span>로 문의해 주시기 바랍니다.</div>
 		</div>
 		
-		<form class="form" method="POST" action="${path}/member/deletePlay" id="frm_mem">
+		<form class="form" method="POST" action="${path}/member/deleteplay" id="frm_mem">
 			<div class="pw_ck">
 				<input type="password" placeholder="비밀번호"  id="pw">
 			</div>

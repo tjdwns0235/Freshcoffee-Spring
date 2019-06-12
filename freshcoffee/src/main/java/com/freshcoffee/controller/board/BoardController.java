@@ -71,7 +71,7 @@ public class BoardController {
 		log.info("상세 게시글 출력");
 //		조회수 증가 처리
 		service.increaseViewCnt(bno, session);
-		
+		log.info("조회수 증가 완료");
 		BoardDTO bDto = service.read(bno);
 		model.addAttribute("one", bDto);
 		
