@@ -225,7 +225,7 @@
 			height: 100%;
 			width: 105px;
 		}
-		#email, #selmail, #url {
+		#email, #selmail, #email_url{
 			height: 31px; 
 		}
 		
@@ -371,7 +371,7 @@
 						<div id="email_wrap">
 							<input type="text" id="email_id" placeholder="email 주소." class="info_input email" name="email_id">
 							<span> @ </span>
-							<input type="text" id="url email_url" class="info_input email_url" name="email_url" placeholder="이메일선택">
+							<input type="text" id="email_url" class="info_input email_url" name="email_url" placeholder="이메일선택">
 							<div class="join_div sel_url">
 								<select id="selmail" class="info_input">
 									<option value="directVal" selected="selected">직접입력</option>
