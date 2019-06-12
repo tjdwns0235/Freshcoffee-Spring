@@ -69,9 +69,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE bno = #{bno}
 	</select>
 	
+	<!--조회수 +1 증가  -->
 	<update id="increaseViewCnt">
 		UPDATE tbl_board SET
 			viewcnt = viewcnt + 1
+		WHERE bno = #{bno}
+	</update>
+	
+	<!--해당게시글 replycnt +1, -1  -->
+	<update id="updateReplyCnt">
+		UPDATE tbl_board SET
+		<if test="flag == 'plus'">
+			replycnt = replycnt+1
+		</if>
+		<if test="flag == 'minus'">
+			replycnt = replycnt-1
+		</if>
 		WHERE bno = #{bno}
 	</update>
 </mapper>

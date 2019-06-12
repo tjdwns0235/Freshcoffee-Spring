@@ -5,9 +5,12 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.stereotype.Service;
+
 import com.freshcoffee.domain.board.BoardDTO;
 import com.freshcoffee.persistence.board.BoardDAO;
 
+@Service
 public class BoardServiceImpl implements BoardService {
 	
 	@Inject
@@ -26,7 +29,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void delete(int bno) {
-
+		
 	}
 
 	@Override

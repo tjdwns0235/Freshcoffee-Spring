@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ include file="../include/common.jsp" %> 
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -146,9 +146,6 @@
 	.box-body {
 		margin-top: 7px;
 	}
-	#orderGood {
-		background-color: #FF0000;
-	}
 	#order_board {
 		display: inline-block;
 	}
@@ -163,10 +160,42 @@
 		margin-right: 2px;
 		display: inline-block;
 	}
-	.pagination * {
-		font-family: 'Sunflower', sans-serif!important;
+	.pagination a.active {
+		background-color: #D8ADB6;
+		border: 1px solid #D8ADB6;
+		color: white;
+	}
+	.board_pagination {
+		width: 100%;
+		height: auto;
+	}
+	
+	.pagination {
+		width: 500px;
+		margin: 20px auto 0;
+		height: 30px;
+		text-align: center;
+	}
+	
+	.pagination a {
 		display: inline-block;
-		height: 24px;
+		width: 30px;
+		color: black;
+		border: 1px solid #ddd;
+		text-align: center;
+		margin-right: 1px;
+		font-weight: 700;
+		height: 23px;
+		text-align: center;
+		line-height: 22px;
+		color: #242424;
+	}
+	
+	.pagination i {
+		width: 30px;
+		display: block;
+		line-height: 23px;
+		color: #242424;
 	}
 	#search_result {
 		width: 500px;
@@ -282,7 +311,7 @@
 
 		<div class="board_pagination">
 			<ul class="pagination">	
-				<c:if test="${map.pager.curBlock > 1}">
+				<%-- <c:if test="${map.pager.curBlock > 1}">
 					<li class="active">
 						<a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
 						<a href="${path}/board/list?curPage=${map.pager.blockBegin - 10 }&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
@@ -292,10 +321,30 @@
 				<c:forEach begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}" var="idx">
 					<li class="active">
 						<a href="${path}/board/list?curPage=${idx}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}"><i class="fas fa-angle-double-right"></i></a>
-						<c:out value="${map.pager.curPage == idx ? 'class=active:' ''}"/>${idx}
+			<c:out value="${map.pager.curPage == idx ? 'class=active:' ''}"/>${idx} 
 					</li>	
-				</c:forEach>
+				</c:forEach> --%>
 				
+				
+				<c:if test="${map.pager.curBlock > 1}">
+                      <a href="${path}/board/list?curPage=1&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-double-left"></i></a>
+                      <a href="${path}/board/list?curPage=${map.pager.blockBegin - 10}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i"><i class="fas fa-angle-left"></i></a>
+                </c:if>
+                
+                <c:forEach begin="${map.pager.blockBegin}" end="${map.pager.blockEnd}" var="idx">
+                      <a href="${path}/board/list?curPage=${idx}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" <c:out value="${map.pager.curPage == idx ? 'class=active':''}"/>>
+                           ${idx}
+                      </a>
+                </c:forEach>
+                
+                <c:if test="${map.pager.curBlock < map.pager.totBlock}">
+                      <a href="${path}/board/list?curPage=${map.pager.blockEnd + 1}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}" class="pagination_i">
+                           <i class="fas fa-angle-right"></i>
+                      </a>
+                      <a href="${path}/board/list?curPage=${map.pager.totPage}&sort_option=${map.sort_option}&keyword=${map.keyword}&search_option=${map.search_option}"  class="pagination_i">
+                           <i class="fas fa-angle-double-right"></i>
+                      </a>
+                </c:if>
 			</ul>
 		</div>
 			</div>

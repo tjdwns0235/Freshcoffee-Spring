@@ -32,6 +32,23 @@ public class ReplyController {
 		
 		return "board/commentlist";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="create", method = RequestMethod.POST)
+	public void create(ReplyDTO rDto) {
+		log.info(">>> 댓글 등록");
+		log.info("@@@@"+ rDto.toString());
+		
+		service.create(rDto);
+		
+	}
+	@RequestMapping(value="delete", method = RequestMethod.GET)
+	public void delete(ReplyDTO rDto) {
+		log.info(">>댓글 삭제");
+		log.info("@@@"+rDto.toString());
+		
+		service.delete(rDto);
+	}
 }
 
 

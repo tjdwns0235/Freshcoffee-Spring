@@ -476,7 +476,7 @@
 				var bno = '${one.bno}';
 				$('#re_bno').val(bno);
 				$.ajax({
-					url: "replyAdd.freshcoffee",
+					url: "${path}/reply/create",
 					type: "POST",
 					data: $("#frm_reply").serialize(),
 					contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
@@ -499,7 +499,7 @@
 		var bno = "${one.bno}";
 		
 		$.ajax({
-			url: "replyRemove.freshcoffee",
+			url: "${path}/reply/delete",
 			data: "rno=" + rno + "&bno=" + bno,
 			success: function(result) {
 				comment_list();

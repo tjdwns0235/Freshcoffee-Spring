@@ -1,5 +1,6 @@
 package com.freshcoffee.persistence.board;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -16,4 +17,5 @@ public interface BoardDAO {
 	public void increaseViewCnt(int bno);
 //	레코드 갯수 계산
 	public int countArticle(String search_option, String keyword);
+	public void updateReplyCnt(HashMap<String, Object> map); // 댓글 조회수 증가
 }

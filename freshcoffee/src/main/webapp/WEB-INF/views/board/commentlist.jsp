@@ -56,7 +56,7 @@
 					
 					<form action="replyAdd.freshcoffee" method="POST" name="frm_reply" id="frm_reply">
 					<div class="reply_btn">
-						<textarea rows="" cols="150" id="replyInsert" name="re_textarea" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
+						<textarea rows="" cols="150" id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
 						<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
@@ -68,7 +68,7 @@
 						</script>
 						<a class="reply_btn">댓글 동록</a>
 							
-						<input type="hidden" name="re_writer" value="${sessionScope.userid}">
+						<input type="hidden" name="writer" value="${sessionScope.userid}">
 						<input type="hidden" name="re_bno" id="re_bno">
 					</div>
 				</div>

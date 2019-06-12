@@ -11,6 +11,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND	  bno = #{bno}
 		ORDER BY rno
 	</select>
+	
+	<insert id="create">
+		INSERT INTO tbl_reply(rno, content, writer, bno)
+		VALUES(seq_reply.NEXTVAL, #{content}, #{writer}, #{bno})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM tbl_reply
+		WHERE rno = #{rno}
+	</delete>
 </mapper>
 
 

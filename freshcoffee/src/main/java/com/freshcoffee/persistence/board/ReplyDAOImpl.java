@@ -23,14 +23,13 @@ public class ReplyDAOImpl implements ReplyDAO {
 
 	@Override
 	public void create(ReplyDTO rDto) {
-		// TODO Auto-generated method stub
-		
+		sqlSession.insert("reply.create", rDto);
 	}
 
 	@Override
-	public void delete(ReplyDTO rDto) {
-		// TODO Auto-generated method stub
-		
+	public void delete(int rno) {
+		sqlSession.delete("reply.delete", rno);
 	}
+
 
 }
