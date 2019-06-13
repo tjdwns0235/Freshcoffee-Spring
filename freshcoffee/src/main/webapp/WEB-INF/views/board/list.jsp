@@ -394,28 +394,7 @@ $(document).ready(function() {
                                  .val("");
     }); */
     $('#boardAdd').click(function(event) {
-         
-         $.ajax({
-               type:"POST",
-               url: "registerAjax.makefree",
-               dataType: "json",
-               success:function(data){
-                    if(data.message == "login"){
-                         location.href = "registerView.makefree";
-                    }else if(data.message == "nologin") {
-                         
-                         $('#modal').css('display', 'flex');
-                         $('#inputid').focus();
-                         $('.err_code').last().css('display','block')
-                                                     .css('color', '#ff1616')
-                                                    .text('로그인이 필요합니다.');
-                    }
-                    
-               },
-               error: function(){
-                    alert("System Error!!!")
-               }
-         });
+         location.href="${path}/board/create";
     });
     
     

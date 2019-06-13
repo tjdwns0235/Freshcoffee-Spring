@@ -6,12 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 </head>
 <body>
 	<div id="commentList">
 		<div id="reply_Wrap_title">
 			<span id="knboard_detail_rspan">댓글 ${replyList.size()}</span>
 		</div>
+		
 		
 		
 		<div id="detail_replay">
@@ -22,6 +24,7 @@
 					</div>
 				</div>
 			</c:if>
+		</div>
 			
 			
 			<c:forEach items="${replyList}" var="replyview">
@@ -32,9 +35,11 @@
 							<a class="reply_del" data_num="${replyview.rno}">삭제</a>
 						</c:if> 
 						<span id="replyList_Date">
-							<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${replyview.date}"></fmt:formatDate>
+							<fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${replyview.regdate}"></fmt:formatDate>
 						</span>
 					</div>
+						${replyview.content}
+				</div>
 			</c:forEach>
 					
 			<c:choose>		
@@ -42,25 +47,16 @@
 					<div class="reply_login" id="reply_nologin">
 						<span class="reply_nologin_span">
 							<a href="#" class="reply_logina">로그인</a>
-							 "을 하시면 댓글을 등록할 수 있습니다."
+							 을 하시면 댓글을 등록할 수 있습니다."
 						</span>
 					</div>
 				</c:when>
 			
-				<otherwise>
-					<div class="reply_line2">
-						<div class="replyList_textarea" id="replyList_textarea">
-						${replyview.content}
-						</div>
-					</div>
-				
-			
-					
-					
+				<c:otherwise>
 					<form action="${path}/reply/create" method="POST" name="frm_reply" id="frm_reply">
-					<div class="reply_btn">
-						<textarea rows="" cols="150" id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
-						<script type="text/javascript">
+						<div class="reply_btn">
+							<textarea id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
+							<script type="text/javascript">
 							var oEditors = [];
 							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
@@ -69,19 +65,20 @@
 							 fCreator: "createSEditor2"
 							});
 						</script>
-						<a class="reply_btn">댓글 동록</a>
-							
-						<input type="hidden" name="writer" value="${sessionScope.userid}">
-						<input type="hidden" name="re_bno" id="re_bno">
-					</div>
-				</otherwise>
-			</c:choose>	
-				</div>
+							<a class="reply_btn">댓글 등록</a>
+								
+							<input type="hidden" name="writer" value="${sessionScope.userid}">
+							<input type="hidden" name="bno"  id="re_bno">
+						</div>
 					</form>
+				</c:otherwise>
+			</c:choose>	
+		
+					
+			
 		</div>
 		
 		
-	</div>
 
 </body>
 </html>

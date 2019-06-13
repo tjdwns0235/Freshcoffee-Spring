@@ -74,21 +74,21 @@
 		color: #e12e1c;
 	}
 	.btn_like {
-	position: relative;
-	display: inline-block;
-	width: 44px;
-	height: 44px;
-	border: 1px solid #e8e8e8;
-	border-radius: 44px;
-	font-family: notokr-bold,sans-serif;
-	font-size: 14px;
-	line-height: 16px;
-	background-color: #fff;
-	color: #DD5D54;
-	box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
-	transition: border .2s ease-out, box-shadow .1s ease-out, background-color .4s ease-out;
-	cursor: pointer;
-	outline: none;
+		position: relative;
+		display: inline-block;
+		width: 44px;
+		height: 44px;
+		border: 1px solid #e8e8e8;
+		border-radius: 44px;
+		font-family: notokr-bold,sans-serif;
+		font-size: 14px;
+		line-height: 16px;
+		background-color: #fff;
+		color: #DD5D54;
+		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.03);
+		transition: border .2s ease-out, box-shadow .1s ease-out, background-color .4s ease-out;
+		cursor: pointer;
+		outline: none;
 	}
 	.btn_like: hover {
 		border: 1px solid rgba(228, 89, 89, 0.3);
@@ -218,17 +218,14 @@
 		background-color: #f39c12;
 	}
 	.reply_Btn {
-		background-color: #3498DB;
-		padding: 7px 15px;
+		width:572px;
+		margin:auto auto;
 		font-size: 14px;
 		border-radius: 25px;
 		color: white;
 		outline: none;
 		border: 0;
 		cursor: pointer;
-	}
-	.reply_Btn:hover {
-		box-shadow: 0 4px 10px 0 rgba(0,0,0,0.2), 0 4px 20px 0 rgba(0,0,0,0.19);
 	}
 	.btn_warning {
 		background-color: #f39c12;
@@ -331,16 +328,16 @@
 						<tr>
 							<th style="border-left: 0;">제목</th>
 							<td colspan="3" style="border-right: 0;">
-								<span class="category_text">3000번째 글</span>
-								<span id="title">오늘 하루 날씨가 좋네요</span>
+								<span class="category_text">${one.bno}</span>
+								<span id="title">${one.title}</span>
 							</td>
 						</tr>
 
 						<tr>
 							<th style="border-left: 0;">작성일</th>
-							<td style="width:30%;">2019.05.17</td>
+							<td style="width:30%;">${one.regdate}</td>
 							<th style="border-left:0px; ">작성자</th>
-							<td style="width: 30%; border-right: 0px;">김다빛</td>
+							<td style="width: 30%; border-right: 0px;">${one.writer}</td>
 						</tr>
 
 						<tr>
@@ -357,14 +354,14 @@
 							
 							</td>
 							<td style="border-right: 0; border-left: 0; text-align: center;">
-								<i class="fa fa-eye"></i>5
-								<i class="fa fa-heart"></i>4
+								<i class="fa fa-eye">${one.viewcnt}</i>
+								<i class="fa fa-heart">${goodcnt}</i>
 							</td>
 						</tr>
 
 						<tr>
 							<td colspan="4" id="detailContent" style="border-right: 0; border-left: 0;" >
-								<p>날씨가 참 좋아요</p>
+								<p${one.content}</p>
 							</td>
 						</tr>
 					</tbody>
@@ -381,8 +378,10 @@
 				<span class="ani_heart_m"></span>
 				</button>
 				
-				<a href="#" id="deleteBtn" class="deleteedit">삭제</a>
-				<a href="#" id="editBtn" class="deleteedit">수정</a>
+				<c:if test="sessionScope.userid == one.writer">
+					<a href="#" id="deleteBtn" class="deleteedit">삭제</a>
+					<a href="#" id="editBtn" class="deleteedit">수정</a>
+				</c:if>
 			</div>
 			
 		</div>
@@ -434,8 +433,8 @@
 		history.pushState(null, document.title, '<%=referer%>');
 		location.reload(); // 리프레쉬 -
 	});
+	
 	$(document).ready(function(){
-		
 		/*문서가 준비되면 댓글 목록을 조회하는 ajax 실행  */
 		comment_list();
 		
@@ -454,7 +453,6 @@
 		
 		function comment_list() {
 			/* alert("test"); */
-			alert("test2");
 			$.ajax ({
 				type:"GET",
 				url: "${path}/reply/list?bno=${one.bno}",
@@ -467,6 +465,7 @@
 		$(document).on("click", ".reply_btn", function(){
 			oEditors.getById["replyInsert"].exec("UPDATE_CONTENTS_FIELD", []);
 			var content = $("#replyInsert").val();
+			
 		
 			
 			if (content == "<p><br></p>") {
@@ -501,7 +500,7 @@
 		
 		$.ajax({
 			url: "${path}/reply/delete",
-			data: "rno=" + rno + "&bno=" + bno,
+			data: "rno="+ rno+"&bno="+bno,
 			success: function(result) {
 				comment_list();
 			},

@@ -13,6 +13,7 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 등록</title>
+<script type="text/javascript" src="${path}/resources/smarteditor/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <style type="text/css">
 	.content {
 		border: 1px solid #fec9c9;
@@ -100,7 +101,7 @@
 	</header>
 	<section class="content">
 		<div class="box">
-			<form action="registerPlay.freshcoffee" name="" method="POST" enctype="multipart/form-data"> <!--첨부파일 보내려면 방식이 POST여야 함!  -->
+			<form action="${path}/board/create" name="frm_board" id="frm_board" method="POST" > <!--첨부파일 보내려면 방식이 POST여야 함!  -->
 				<div class="insert_title">
 					<h3>Q & A</h3>
 					<label for="title"><h4>제목</h4></label>
@@ -111,21 +112,21 @@
 				<div class="insert_Content">
 					<label for="content"><div class="content_MiniTitle">내용</div></label>
 					<textarea name="content" id="registerInsert" placeholder="내용을 입력해주세요!"></textarea>
-						<script type="text/javascript">
-							var oEditors = [];
-							 nhn.husky.EZCreator.createInIFrame({
-							 oAppRef: oEditors,
-							 elPlaceHolder: "registerInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEdit2Skin.html",
-							 fCreator: "createSEditor2"
-							});
-						</script>	
+					<script type="text/javascript">
+						var oEditors = [];
+						nhn.husky.EZCreator.createInIFrame({
+						 oAppRef: oEditors,
+						 elPlaceHolder: "registerInsert",
+						 sSkinURI: "<%=request.getContextPath()%>/resources/smarteditor/SmartEditor2Skin.html",
+						 fCreator: "createSEditor2"
+						});
+					</script>	
 				</div>
 				
 				<div class="writer">
 					<label for="writer"><div>작성자</div></label>
 					<span class="content_MiniTitle">
-						<input type="text"  readonly="readonly" name="writer">
+						<input type="text" value="${sessionScope.userid}" readonly="readonly" name="writer">
 					</span>
 				</div>
 				</form>
@@ -138,7 +139,7 @@
 						<i class="fas fa-times" id="close_file_btn" style="display:none;"></i>
 					</span>
 				</span>
-				<button class="update_Btn">게시글등록</button>
+				<button type="button" class="update_Btn">게시글등록</button>
 			</div>
 
 		</div>
@@ -148,67 +149,57 @@
 		<%@ include file="../include/footer.jsp" %>
 	</footer>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+<script type="text/javascript">
 	$(document).ready(function(){
-		oEditors.getById["replyInsert"].exec("UPDATE_CONTENTS_FIELD", []);
-		
-		var title = $("#title").val();
-		var content = $("#registerInsert").val();
-		
-		
-		 if(title == "<p><br></p>") {
-			alert("제목을 입력해주세요");
-			$("#title").focus();
-			return false;
-		}else if(content == "<p><br></p>") {
-			alert("내용을 입력해주세요");
-			return false;
-			$("#registerInsert").focus();
-		}else if (id == null) {
-			alert("로그인을 해주세요");
-		}else {
-			$.ajax({
-				url: "register.freshcoffee",
-				type: "POST",
-				data: $("#frm_reply").serialize(),
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				success: function() {
-					comment_list();
-					$("#replyInsert"),val(""); // AJAX이므로 페이지 원복 하기때문에 댓글 등록에 등록하려고 했던 내용이 그대로 남아있기 때문에 없애줘야한다.
-				},
-				error: function() {
-					slert("System Error!!");
-				}
-			}); 
-		}
-	});
-	
-	$(document).on("click", ".btn-file", function(){
-		$("#uploadfile").click();
-	});
-	
-	$(document).on("change", "#uploadfile", function(){
-		var filesize = $(this)[0].files;
-		if(filesize.length < 1) {
-			$('#file_name').text("선택된 파일 없음");
-			$("#close_file_btn").css('display', 'none');
-		}else {
-			var filename = this.files[0].name;
-			var size = this.files[0].size;
-			var maxSize = 30 * 1024 * 1024;
+		$(document).on("click", ".update_Btn", function(){
+			oEditors.getById["registerInsert"].exec("UPDATE_CONTENTS_FIELD", []);
 			
-			if(size > maxSize){	
-				alert("첨부파일 사이즈는 30MB 이내로 등록 가능합니다");
-				$("#file_name").text("선택된 파일 없음");
-				$("#uploadfile").val(""); //30mb이상이여도 올려버린다 따라서 초기화를 해줘야 한다
-				$("#now_file_size").text("");
-			} else {
-				$("#file_name").text(filename);
-				var formSize = size/(1024*1024);
-				$("#now_file_size").text("("+formSize.toFixed(2) + "mb)");
-				$("#close_file_btn").css("display", "block");
+			var title = $("#title").val();
+			var content = $("#registerInsert").val();
+			
+			 if(title == "<p><br></p>") {
+				alert("제목을 입력해주세요");
+				$("#title").focus();
+				return false;
+			}else if(content == "<p><br></p>") {
+				alert("내용을 입력해주세요");
+				return false;
+				$("#registerInsert").focus();
 			}
-		}
+			 $('#frm_board').submit();
+			});
+		 
+	
+	
+	
+		$(document).on("click", ".btn-file", function(){
+			$("#uploadfile").click();
+		});
+		
+		$(document).on("change", "#uploadfile", function(){
+			var filesize = $(this)[0].files;
+			
+			if(filesize.length < 1) {
+				$('#file_name').text("선택된 파일 없음");
+				$("#close_file_btn").css('display', 'none');
+			}else {
+				var filename = this.files[0].name;
+				var size = this.files[0].size;
+				var maxSize = 30 * 1024 * 1024;
+				
+				if(size > maxSize){	
+					alert("첨부파일 사이즈는 30MB 이내로 등록 가능합니다");
+					$("#file_name").text("선택된 파일 없음");
+					$("#uploadfile").val(""); //30mb이상이여도 올려버린다 따라서 초기화를 해줘야 한다
+					$("#now_file_size").text("");
+				} else {
+					$("#file_name").text(filename);
+					var formSize = size/(1024*1024);
+					$("#now_file_size").text("("+formSize.toFixed(2) + "mb)");
+					$("#close_file_btn").css("display", "block");
+				}
+			}
+		});
 		
 		$(document).on("click", '#close_file_btn', function(){
 			$("#uploadfile").replaceWith($("#uploadfile").clone(true));
@@ -217,8 +208,8 @@
 			$("#file_name").text("선택된 파일 없음");
 			$("#close_file_btn").css("display", "none");
 		});
-		
 	});
+	
 </script>
 </body>
 </html>

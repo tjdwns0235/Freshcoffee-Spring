@@ -21,9 +21,8 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDAO bDao;
 
 	@Override
-	public void create(BoardDTO bDto) {
-		// TODO Auto-generated method stub
-
+	public int create(BoardDTO bDto) {
+		return bDao.create(bDto);
 	}
 
 	@Override

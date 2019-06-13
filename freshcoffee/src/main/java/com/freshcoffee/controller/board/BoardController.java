@@ -77,4 +77,18 @@ public class BoardController {
 		
 		return "board/view";
 	}
+	
+	@RequestMapping(value = "create", method=RequestMethod.GET)
+	public String createView() {
+		log.info("게시글 등록 페이지 출력");
+		
+		return "board/register";
+	}
+	@RequestMapping(value = "create", method=RequestMethod.POST)
+	public String create(BoardDTO bDto) {
+		log.info("게시글 등록 페이지 출력");
+		
+		service.create(bDto);
+		return "redirect:/board/list";
+	}
 }
