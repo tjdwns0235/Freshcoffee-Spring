@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import com.freshcoffee.domain.board.BoardDTO;
 
 public interface BoardService {
-	public void create(BoardDTO bDto);//게시글  등록
+	public int create(BoardDTO bDto);//게시글  등록
 	public void update(BoardDTO bDto);
 	public void delete(int bno);
 	public BoardDTO read(int bno);

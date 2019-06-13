@@ -407,11 +407,11 @@
 		  
 	  
 		  $('#cbox').click(function(){
-			  var flag = $(this).is(':checked');
+			 var flag = $(this).is(':checked'); 
 			  
-			  if(flag == true) {
+			 if(flag == true) { 
 				  $('.ckboxs').prop('checked', true);
-			  } else {
+			 }else {
 				  $('.ckboxs').prop('checked', false);
 			  }
 	  	 });

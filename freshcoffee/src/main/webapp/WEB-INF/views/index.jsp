@@ -23,7 +23,7 @@
 		.bodycontent {
 			width: 1440px;
 			margin: 0 auto;
-			border: 1px solid black;
+			/* border: 1px solid black; */
 			text-align: center;
 			height: auto;
 		}
@@ -180,5 +180,9 @@
 	</section>
 	<script type="text/javascript">
 	</script>
+	
+	<footer style="margin-top:120px;">
+		 <%@include file="include/footer.jsp"%>
+	</footer>
 </body>
 </html>

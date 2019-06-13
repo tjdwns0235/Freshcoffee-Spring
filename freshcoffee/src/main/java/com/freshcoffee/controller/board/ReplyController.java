@@ -45,7 +45,7 @@ public class ReplyController {
 	@RequestMapping(value="delete", method = RequestMethod.GET)
 	public void delete(ReplyDTO rDto) {
 		log.info(">>댓글 삭제");
-		log.info("@@@"+rDto.toString());
+		log.info("댓글 삭제 @@@"+rDto.toString());
 		
 		service.delete(rDto);
 	}

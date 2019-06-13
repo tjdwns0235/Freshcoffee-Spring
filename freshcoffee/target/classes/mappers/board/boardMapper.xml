@@ -87,4 +87,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</if>
 		WHERE bno = #{bno}
 	</update>
+	
+	<insert id="create" parameterType="com.freshcoffee.domain.board.BoardDTO">
+		INSERT INTO tbl_board(bno, title,content,writer)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
 </mapper>

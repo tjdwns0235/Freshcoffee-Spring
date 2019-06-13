@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div id="modal">
 		<div id="modal_login">
 			<header>
@@ -177,7 +176,17 @@
 	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+	// 로그인 인터셉터에서 보내는 메시지
+	var message = '${message}';
+	var uri = '${uri}';
+	
 		$(document).ready(function() {
+			if (message == 'nologin') {
+				$('#modal').css('display', 'flex');
+				$('.err_code').eq(1).text('로그인이 필요한 시스템입니다').css('display','block');
+			}
+			
+			
 			$(window).scroll(function(){
 				var scrolValue = $(this).scrollTop();
 				if (scrolValue > 40) {
@@ -224,7 +233,11 @@
 					data: "id="+id+"&pw="+pw,
 					success: function(data) {
 						if(data == "1") {
-							location.reload();			
+							if (uri == "") {
+								location.reload();
+							}else  {
+								location.href = uri;
+							}
 						} else if(data == "-1") {
 							$('#inputid').select();
 							$('.err_code').text('회원 아이디 또는 비밀번호가 일치하지 않습니다.')

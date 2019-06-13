@@ -25,6 +25,7 @@ a:link, a:visited {
 	width: 100%;
 	margin: auto;
 	display: none;
+	
 }
 #modal_login {
 	width: 450px;
@@ -33,6 +34,8 @@ a:link, a:visited {
 	background-color:white;
 	height:520px;
 	position:relative;
+	border-radius: 15px;
+	
 }
 #modal_close {
 	font-size: 15px;
