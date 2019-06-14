@@ -162,7 +162,7 @@
 	}
 	.pagination a.active {
 		background-color: #ffcbcb6e;
-		border: 1px solid #D8ADB6;
+		border: 1px solid #ffcbcb6e;
 		color: white;
 	}
 	.board_pagination {

@@ -173,7 +173,7 @@ hr {
 	flex-direction: column;
 	position: absolute;
 	top:35px;
-	right:300px;
+	right:326px;
 }
  .dropdown > a {
 	flex:1;
@@ -182,8 +182,8 @@ hr {
 	background-color: #FADAD8;
 	font-size: 20px;
 }
-}
-.header_member > li:hover .dropdown{
+
+.header_member li:hover .dropdown{
 	display: flex;
 }
  
