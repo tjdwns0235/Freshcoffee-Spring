@@ -39,6 +39,7 @@ public class ReplyServiceImpl implements ReplyService {
 		bDao.updateReplyCnt(map);
 	}
 	
+	@Transactional
 	@Override
 	public void delete(ReplyDTO rDto) {
 //		비즈니스 로직

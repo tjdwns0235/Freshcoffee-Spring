@@ -94,7 +94,7 @@
 							  	<li><a href="#" class="mypage logout_btn">로그아웃</a>
 								<li><a href="#" class="mypage" id="mypage">마이페이지</a>
 									<div class="dropdown">
-									     <a href="${path}/member/pwupdate">비밀번호 수정</a>
+									     <a href="${path}/member/pwupdate">비밀번호수정</a>
 										 <a href="${path}/member/update">회원수정</a>
 										 <a href="${path}/member/delete">회원탈퇴</a>
 									</div>

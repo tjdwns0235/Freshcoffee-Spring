@@ -27,12 +27,13 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void update(BoardDTO bDto) {
-
+//		DB 가서 수정
+		bDao.update(bDto);
 	}
 
 	@Override
 	public void delete(int bno) {
-		
+		bDao.delete(bno);
 	}
 
 	@Override

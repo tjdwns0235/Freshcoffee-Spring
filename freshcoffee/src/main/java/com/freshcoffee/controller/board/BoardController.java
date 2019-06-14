@@ -85,10 +85,35 @@ public class BoardController {
 		return "board/register";
 	}
 	@RequestMapping(value = "create", method=RequestMethod.POST)
-	public String create(BoardDTO bDto) {
+	public String create(BoardDTO bDto,HttpSession session) {
 		log.info("게시글 등록 페이지 출력");
-		
 		service.create(bDto);
+		
+		String writer = (String)session.getAttribute("userid");
+		bDto.setWriter(writer);
+		return "redirect:/board/view?bno=" + bDto.getBno();
+	}
+	@RequestMapping(value = "delete", method=RequestMethod.GET)
+	public void delete(int bno) {
+		log.info("delete 게시판 삭제");
+		
+		service.delete(bno);
+	}
+	
+	@RequestMapping(value = "update", method=RequestMethod.GET)
+	public String updateView(int bno, Model model) {
+		log.info("update 게시판 수정");
+		BoardDTO bDto = service.read(bno);
+		
+		model.addAttribute("one", bDto);
+		
+		return "board/modify";
+	}
+	@RequestMapping(value = "update", method=RequestMethod.POST)
+	public String updatePlay(BoardDTO bDto) {
+		log.info("update 게시판 수정action");
+		service.update(bDto);
+		
 		return "redirect:/board/list";
 	}
 }

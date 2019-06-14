@@ -210,7 +210,7 @@
 		font-size: 12px;
 	}
 	#reply_Btn {
-		background-color: #f39c12;
+		background-color: #f39c12!important;
 		display: inline-block;
 		margin-top: 10px;
 	}
@@ -219,10 +219,10 @@
 	}
 	.reply_Btn {
 		width:572px;
+		height: 370px;
 		margin:auto auto;
 		font-size: 14px;
 		border-radius: 25px;
-		color: white;
 		outline: none;
 		border: 0;
 		cursor: pointer;
@@ -261,9 +261,8 @@
 		border-radius: 25px;
 		position: absolute;
 		top: 50%;
-		left: 50%;
+		left: 40%;
 		margin-top: -160px;
-		border: 2px solid #2c3e50;
 	}
 	#modal_header {
 		height: 35px;
@@ -277,6 +276,7 @@
 		text-align: center;
 		font-size: 20px;
 		padding: 20px 0;
+		color:#333;
 	}
 	.btn_Login {
 		text-align: center;
@@ -294,7 +294,7 @@
 		margin: 0 20px 20px;
 		line-height: 33px;
 	}
-	.btn_Login:hover {
+	.btn_Login a:hover {
 		background-color: #2c3e50;
 		color: white;
 	}
@@ -305,6 +305,8 @@
 		width: 90px;
 		height:25px;
 		background-color: pink;
+		margin-left:10px;
+		margin-right:20px;
 	}
 	#editBtn {
 		width: 90px;
@@ -361,16 +363,13 @@
 
 						<tr>
 							<td colspan="4" id="detailContent" style="border-right: 0; border-left: 0;" >
-								<p${one.content}</p>
+								<p> ${one.content}</p>
 							</td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 
-			<div id="user_Btn">
-				<button type="button" id="return_go" class="reply_Btn"></button>
-			</div>
 			
 			<div id="wrap_like">
 				<button type="button" class="btn_like" id="btn_good">
@@ -378,9 +377,9 @@
 				<span class="ani_heart_m"></span>
 				</button>
 				
-				<c:if test="sessionScope.userid == one.writer">
-					<a href="#" id="deleteBtn" class="deleteedit">삭제</a>
-					<a href="#" id="editBtn" class="deleteedit">수정</a>
+				<c:if test="${sessionScope.userid == one.writer}">
+					<a id="deleteBtn" class="deleteedit">삭제</a>
+					<a href="${path}/board/update?bno=${one.bno}"  id="editBtn" class="deleteedit">수정</a>
 				</c:if>
 			</div>
 			
@@ -410,8 +409,8 @@
 						을 삭제하시겠습니까?
 					</div>
 					<div class="btn_Login">
-						<a href="#" id="no_Btn">아니오</a>
-						<a href="#" id="yes_Btn">네</a>
+						<a id="no_Btn">아니오</a>
+						<a id="yes_Btn">네</a>
 					</div>
 				</div>
 			</div>
@@ -492,7 +491,7 @@
 		});
 		
 		
-	});
+	
 	
 	$(document).on("click", ".reply_del", function(){
 		var rno = $(this).attr("data_num");
@@ -509,7 +508,37 @@
 			}
 		});
 	});
+	
 
+	/* $(document).on("click", "#editBtn", function(){
+		location.href="${path}/board/update?bno="+bno;
+	}); */
+	
+	$(document).on("click", "#deleteBtn", function(){
+		$("#modal_all").css("display", "flex");
+	});
+	
+	$(document).on("click", "#no_Btn", function(){
+		location.href=referer;
+	});
+	
+	$(document).on("click", "#yes_Btn" , function(){
+		var bno = "${one.bno}";
+		
+		 $.ajax({
+			url: "${path}/board/delete",
+			data: "bno="+bno,
+			success: function(result) {
+				comment_list();
+			},
+			error: function() {
+				alert("System Error!!");
+			}
+		}); 
+		 
+	});
+	
+}); 
 </script>	
 </body>
 </html>
