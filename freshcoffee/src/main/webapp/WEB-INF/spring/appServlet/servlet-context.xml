@@ -32,8 +32,10 @@
 	<context:component-scan base-package="com.freshcoffee.controller" /> 
 	<context:component-scan base-package="com.freshcoffee.service" />
 	<context:component-scan base-package="com.freshcoffee.persistence" />
+	<context:component-scan base-package="com.freshcoffee.aop" />
 	<!-- <context:component-scan base-package="com.freshcoffee.*" /> -->
 		
+	<!--AOP의 설정으로 Proxy 객체를 자동으로 생성  -->
 		<aop:aspectj-autoproxy />
 		
 	<!--인터셉터 빈을 등록  -->

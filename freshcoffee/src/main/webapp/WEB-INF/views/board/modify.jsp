@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  <%--   <%@ include file="${path}../iclude/header.jsp"%> --%>
+  <%@ include file="../include/header.jsp"%> 
   <%--   <c:if test="${sessionScope.loginUser == null}">
  	   <script>
  	   		alert("로그인 하 신 후 사용하세요. ");
  	   		location.href="${path}/boardList.freshcoffee?message=nologin";
  	   </script>
  	</c:if> --%>
- 	<%@include file="../include/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,23 +99,23 @@
 	</header>
 	<section class="content">
 		<div class="box">
-			<form action="registerPlay.freshcoffee" name="" method="POST" enctype="multipart/form-data"> <!--첨부파일 보내려면 방식이 POST여야 함!  -->
+			<form action="${path}/board/update" id="frm_modify" method="POST" > <!--첨부파일 보내려면 방식이 POST여야 함!  -->
 				<div class="insert_title">
 					<h3>Q & A 글 수정</h3>
 					<label for="title"><h4>제목</h4></label>
-					<span class="title_input"><input type="text" name="title" id="title" placeholder="제목을입력해주세요"></span>
+					<span class="title_input"><input type="text" name="title" id="title" value="${one.title}"></span>
 					<span class="boardinsert_err"></span>
 				</div>
 	
 				<div class="insert_Content">
 					<label for="content"><div class="content_MiniTitle">내용</div></label>
-					<textarea name="content" id="registerInsert" placeholder="내용을 입력해주세요!"></textarea>
+					<textarea name="content" contextmenu="${one.content}" id="registerInsert" placeholder="내용을 입력해주세요!"></textarea>
 						<script type="text/javascript">
 							var oEditors = [];
-							 nhn.husky.EZCreator.createInIFrame({
+							nhn.husky.EZCreator.createInIFrame({
 							 oAppRef: oEditors,
 							 elPlaceHolder: "registerInsert",
-							 sSkinURI: "<%=request.getContextPath()%>/smarteditor/SmartEdit2Skin.html",
+							 sSkinURI: "${path}/resources/smarteditor/SmartEditor2Skin.html",
 							 fCreator: "createSEditor2"
 							});
 						</script>	
@@ -125,7 +124,7 @@
 				<div class="writer">
 					<label for="writer"><div>작성자</div></label>
 					<span class="content_MiniTitle">
-						<input type="text"  readonly="readonly" name="writer">
+						<input type="text"   value="${one.writer}" readonly="readonly" name="writer">
 					</span>
 				</div>
 				</form>
@@ -142,7 +141,7 @@
 						<i class="fas fa-times" id="close_file_btn" style="display:none;"></i>
 					</span>
 				</span>
-				<button class="update_Btn">게시글등록</button>
+				<button type="button" id="update_Btn">수정</button>
 			</div>
 
 		</div>
@@ -230,8 +229,8 @@
 		$('.basic_files').css('color', '#AAA').css('text-decoration', 'line-through');
 	});
 	
-	$(document).click('.update_Btn')function(){
-		alert("test");
+	$(document).click('#update_Btn')function(){
+		$("#frm_modify").submit;
 	});
 </script>
 </body>

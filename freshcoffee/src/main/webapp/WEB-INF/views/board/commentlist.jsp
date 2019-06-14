@@ -55,6 +55,7 @@
 				<c:otherwise>
 					<form action="${path}/reply/create" method="POST" name="frm_reply" id="frm_reply">
 						<div class="reply_btn">
+							<span>작성자: ${replyview.writer}</span>
 							<textarea id="replyInsert" name="content" class="replylist_textarea" placeholder="댓글을 남겨보세요"></textarea>
 							<script type="text/javascript">
 							var oEditors = [];

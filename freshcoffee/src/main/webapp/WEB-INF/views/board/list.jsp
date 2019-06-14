@@ -161,7 +161,7 @@
 		display: inline-block;
 	}
 	.pagination a.active {
-		background-color: #D8ADB6;
+		background-color: #ffcbcb6e;
 		border: 1px solid #D8ADB6;
 		color: white;
 	}
