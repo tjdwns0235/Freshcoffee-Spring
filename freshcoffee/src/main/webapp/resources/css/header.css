@@ -172,15 +172,13 @@ hr {
 	display:none;
 	flex-direction: column;
 	position: absolute;
-	top:35px;
-	right:326px;
 }
  .dropdown > a {
 	flex:1;
 	width: auto;
 	margin: 0 auto;
 	background-color: #FADAD8;
-	font-size: 20px;
+	font-size: 18px;
 }
 
 .header_member li:hover .dropdown{

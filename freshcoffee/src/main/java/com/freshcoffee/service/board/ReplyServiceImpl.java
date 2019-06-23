@@ -51,5 +51,4 @@ public class ReplyServiceImpl implements ReplyService {
 		map.put("bno", rDto.getBno());
 		bDao.updateReplyCnt(map);
 	}
-
 }

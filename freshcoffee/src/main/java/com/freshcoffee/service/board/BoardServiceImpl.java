@@ -13,6 +13,7 @@ import com.freshcoffee.persistence.board.BoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
+
 @Slf4j
 @Service
 public class BoardServiceImpl implements BoardService {

@@ -117,7 +117,7 @@
 
 		<!-- Logging -->
 		<!-- logback 로깅 관련 -->
-		<dependency>
+	<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 			<version>1.2.3</version>
