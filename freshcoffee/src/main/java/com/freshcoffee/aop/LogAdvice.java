@@ -27,9 +27,9 @@ public class LogAdvice {
 	
 	
 	// execution경로에 //는 하위패키지들이  다들어갈 수 있다는 의미
-	@Around("execution(* com.freshcoffee.controller..*Controller.*(..))"
-			+ " or execution(* com.freshcoffee.service..*Impl.*(..))"
-			+ " or execution(* com.freshcoffee.persistence..*Impl.*(..))")
+//	@Around("execution(* com.freshcoffee.controller..*Controller.*(..))"
+//			+ " or execution(* com.freshcoffee.service..*Impl.*(..))"
+//			+ " or execution(* com.freshcoffee.persistence..*Impl.*(..))")
 	public Object logPrint(ProceedingJoinPoint joinPoint) throws Throwable {
 //		메서드 시작시간
 		long start = System.currentTimeMillis();

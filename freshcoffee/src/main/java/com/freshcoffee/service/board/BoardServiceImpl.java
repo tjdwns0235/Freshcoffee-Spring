@@ -69,8 +69,19 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public int countArticle(String search_option, String keyword) {
-		// TODO Auto-generated method stub
 		return bDao.countArticle(search_option, keyword);
+	}
+
+	@Override
+	public void answer(BoardDTO bDto) {
+//		비즈니스 로직: 답글 등록
+//		1. 답글 달려고하는 게시글의 re_step보다 큰답글들을 re_step + 1
+		bDao.updateStep(bDto.getRef(), bDto.getRe_step());
+//		2. 답글 테이블에 등록
+		bDto.setRe_step(bDto.getRe_step() + 1);
+		bDto.setRe_level(bDto.getRe_level() + 1);
+		bDao.answer(bDto);
+		
 	}
 
 	

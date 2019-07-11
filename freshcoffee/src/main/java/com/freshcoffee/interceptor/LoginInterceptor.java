@@ -27,6 +27,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 			String referer = request.getHeader("referer");//referer의 역할은 이전 페이지 를 알려준다
 //			response.sendRedirect(referer + "?message=nologin");
 			String uri = request.getRequestURI();
+			String query = request.getQueryString();
+			
+			if (query == null || query.equals("null")) {
+				query = "";
+			} else {
+				query = "?" + query;
+			}
 			
 			int index = referer.lastIndexOf("/"); // 6
 			int length = referer.length(); //전체 길이
@@ -41,8 +48,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 //			Login 페이지로 이동
 			FlashMap flashMap = RequestContextUtils.getOutputFlashMap(request);
 			flashMap.put("message", "nologin");
-			flashMap.put("uri", uri);
-			log.info("URI>>> "+ uri);
+			flashMap.put("uri", (uri+query));
+			log.info("URI>>> "+ (uri+query));
 			
 			RequestContextUtils.saveOutputFlashMap(referer, request, response);
 			response.sendRedirect(referer);

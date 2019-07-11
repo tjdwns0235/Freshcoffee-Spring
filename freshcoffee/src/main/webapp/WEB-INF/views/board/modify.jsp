@@ -130,7 +130,7 @@
 				</form>
 
 			<div class="file_Area">
-				<span><input type="file" name="uploadfile" id="uploadfile" style="display:none">
+				<%-- <span><input type="file" name="uploadfile" id="uploadfile" style="display:none">
 					<input type="button" class="btn btn-file" value="파일선택">
 					<span class ="files" id="file-name" style="height: 29px; border: none;">
 					<span class="files basic_files">${one.filename}</span>
@@ -140,7 +140,7 @@
 					<span id="now_file_size">
 						<i class="fas fa-times" id="close_file_btn" style="display:none;"></i>
 					</span>
-				</span>
+				</span> --%>
 				<button type="button" id="update_Btn">수정</button>
 			</div>
 
@@ -186,11 +186,11 @@
 		}
 	});
 	
-	$(document).on("click", ".btn-file", function(){
+	/* $(document).on("click", ".btn-file", function(){
 		$("#uploadfile").click();
-	});
+	}); */
 	
-	$(document).on("change", "#uploadfile", function(){
+	/* $(document).on("change", "#uploadfile", function(){
 		var filesize = $(this)[0].files;
 		if(filesize.length < 1) {
 			$('#file_name').text("선택된 파일 없음");
@@ -214,9 +214,9 @@
 		}
 		
 	
-	});
+	}); */
 	
-	$(document).on("click", '#close_file_btn', function(){
+	/* $(document).on("click", '#close_file_btn', function(){
 		$("#uploadfile").replaceWith($("#uploadfile").clone(true));
 		$("#uploadfile").val("");
 		$('#now_file_size').text("");
@@ -227,7 +227,7 @@
 	$(document).on('click', 'close_basic_btn', function(){
 		$('.file_msg').css('display', 'block');
 		$('.basic_files').css('color', '#AAA').css('text-decoration', 'line-through');
-	});
+	}); */
 	
 	$(document).click('#update_Btn')function(){
 		$("#frm_modify").submit;

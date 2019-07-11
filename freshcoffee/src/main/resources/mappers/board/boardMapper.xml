@@ -6,20 +6,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--게시글 목록 출력  -->
 	<select id="listAll" resultType="com.freshcoffee.domain.board.BoardDTO">
 		<include refid="paging_header"/>
-		SELECT bno, title, content, writer, m.id, viewcnt, replycnt, goodcnt, b.regdate
+		SELECT bno, title, content, writer, m.id, viewcnt, replycnt, goodcnt, b.regdate, b.re_level
 		FROM tbl_board b, tbl_member m
 		<include refid="search"/>
 		<if test="sort_option == 'new'">
-			ORDER BY bno DESC
+			ORDER BY ref DESC, re_step
 		</if>
 		<if test="sort_option == 'good'">
-			ORDER BY goodcnt DESC
+			ORDER BY goodcnt DESC, ref DESC, re_step
 		</if>
 		<if test="sort_option == 'reply'">
-			ORDER BY replycnt DESC, bno DESC
+			ORDER BY replycnt DESC, ref DESC, re_step
 		</if>
 		<if test="sort_option == 'view'">
-			ORDER BY viewcnt DESC
+			ORDER BY viewcnt DESC, ref DESC, re_step
 		</if>
 		<include refid="paging_footer"/>
 	</select>
@@ -77,7 +77,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<!--해당게시글 replycnt +1, -1  -->
-	<update id="updateReplyCnt">
+	<update id="updateReplyCnt" parameterType="hashmap">
 		UPDATE tbl_board SET
 		<if test="flag == 'plus'">
 			replycnt = replycnt+1
@@ -89,23 +89,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<insert id="create" parameterType="com.freshcoffee.domain.board.BoardDTO">
-		INSERT INTO tbl_board(bno, title,content,writer)
-		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+		INSERT INTO tbl_board(bno, title,content,writer, ref, re_step, re_level)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer}, seq_board.CURRVAL, 1, 0)
 		<selectKey keyProperty="bno" resultType="Integer" order="AFTER">
 			SELECT seq_board.CURRVAL FROM dual
 		</selectKey>
 	</insert>
 	<!--CURRVAL이란 현재 시퀀스 번호를 뜻한다.  -->
 	
-	<delete id="delete">
+	<delete id="delete" parameterType="int">
 		DELETE FROM tbl_board
 		WHERE bno = #{bno}
 	</delete>
 	
-	<update id="update">
+	<update id="update" parameterType="com.freshcoffee.domain.board.BoardDTO">
 		UPDATE tbl_board SET
 		title = #{title},
 		content = #{content}
 		WHERE bno = #{bno}
 	</update>
+	
+	<update id="updateStep" parameterType="hashmap">
+		UPDATE tbl_board
+		SET  re_step = re_step + 1
+		WHERE ref = #{ref} AND re_step > #{re_step}
+	</update>
+	
+	<insert id="answer" parameterType="com.freshcoffee.domain.board.BoardDTO">
+		INSERT INTO tbl_board(bno, title,content,writer, ref, re_step, re_level)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer}, #{ref}, #{re_step}, #{re_level})
+	</insert>
 </mapper>

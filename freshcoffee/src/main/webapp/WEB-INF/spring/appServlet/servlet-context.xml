@@ -33,6 +33,7 @@
 	<context:component-scan base-package="com.freshcoffee.service" />
 	<context:component-scan base-package="com.freshcoffee.persistence" />
 	<context:component-scan base-package="com.freshcoffee.aop" />
+	<context:component-scan base-package="com.freshcoffee.upload" />
 	<!-- <context:component-scan base-package="com.freshcoffee.*" /> -->
 		
 	<!--AOP의 설정으로 Proxy 객체를 자동으로 생성  -->
@@ -53,5 +54,15 @@
 			<beans:ref bean="loginInterceptor"/>
 		</interceptor>
 	</interceptors>
-
+	
+	<!-- 파일 업로드 관련 설정 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"/>
+	</beans:bean>
+		<!--파일업로드를위한 디렉토리 설정  -->
+		<!-- String uploadPath = new String(); -->
+	<beans:bean id="uploadPath" class="java.lang.String">
+		<beans:constructor-arg value="/Users/skyblue/DROP"/>
+	</beans:bean>
+	
 </beans:beans>

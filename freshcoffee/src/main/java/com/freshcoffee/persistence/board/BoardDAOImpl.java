@@ -77,4 +77,17 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.update("board.updateReplyCnt", map);
 	}
 
+	@Override
+	public void updateStep(int ref, int re_step) {
+		Map<String, Integer> map = new HashMap<>();
+		map.put("ref", ref);
+		map.put("re_step", re_step);
+		sqlSession.update("board.updateStep" , map);
+	}
+
+	@Override
+	public void answer(BoardDTO bDto) {
+		sqlSession.insert("board.answer", bDto);
+	}
+
 }

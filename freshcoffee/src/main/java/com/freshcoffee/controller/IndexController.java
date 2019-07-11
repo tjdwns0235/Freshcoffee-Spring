@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.freshcoffee.domain.product.ProductDTO;
 import com.freshcoffee.service.product.ProductService;
@@ -23,11 +24,14 @@ public class IndexController {
 	private ProductService service;
 	
 	@RequestMapping("/")
-	public String index(Model model) {
-//		log.info(">>>> Index 페이지");
+	public ModelAndView index() {
+		log.info(">>>> Index 페이지");
 		HashMap<String, List<ProductDTO>> map = service.productList();
-		model.addAttribute("pLists", map);
 		
-		return "index";
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pLists", map);
+		mav.setViewName("index");
+		
+		return mav;
 	}
 }

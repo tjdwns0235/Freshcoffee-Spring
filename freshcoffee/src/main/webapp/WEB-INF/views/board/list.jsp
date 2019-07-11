@@ -258,6 +258,7 @@
 							<fmt:formatDate value="${bDto.regdate}" pattern="yyyy-MM-dd" var="regdate"/>
 							<td class="text_center" style="background-color: white;">${bDto.bno}</td>
 							<td style="background-color: white;" class="title_table">
+								<c:forEach begin="1" end="${bDto.re_level}"><i class="fas fa-arrow-right"></i></c:forEach>
 								<a href="${path}/board/view?bno=${bDto.bno}">${bDto.title}</a>
 								<c:if test="${bDto.replycnt > 0}">
                                           <span class="replyCnt_Color">( ${bDto.replycnt} )</span>
@@ -287,9 +288,9 @@
 							</td>
 							<td style="background-color: white;" class="text_center">${bDto.viewcnt}</td>
 							<td style="background-color: white;" class="text_center">
-								<c:if test="${bDto.filesize > 0}">
+								<%-- <c:if test="${bDto.filesize > 0}">
 	                            	<i class="fas fa-paperclip" style="color:slateblue;"></i>
-	                            </c:if>
+	                            </c:if> --%>
                             </td>
 						</tr>
 					</c:forEach>

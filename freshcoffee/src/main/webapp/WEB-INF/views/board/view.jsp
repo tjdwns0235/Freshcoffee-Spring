@@ -344,7 +344,7 @@
 
 						<tr>
 							<th style="border-left: 0;">첨부파일</th>
-							<td colspan="2" style="border-right: 0;">${one.filename}
+							<%-- <td colspan="2" style="border-right: 0;">${one.filename}
 							<c:if test="${one.filesize > 0}">
 								<div id="download">
 									<a href="download.freshcoffee?file=${one.filename}">
@@ -352,7 +352,7 @@
 										</fmt:formatNumber>)
 									</a>
 								</div>
-							</c:if>
+							</c:if> --%>
 							
 							</td>
 							<td style="border-right: 0; border-left: 0; text-align: center;">
@@ -370,7 +370,9 @@
 				</table>
 			</div>
 
-			
+			<div>
+				<a id="anwer_btn">답글</a>
+			</div>
 			<div id="wrap_like">
 				<button type="button" class="btn_like" id="btn_good">
 				<span class="img_emoti">좋아요</span>
@@ -507,6 +509,10 @@
 				alert("System Error!!");
 			}
 		});
+	});
+	
+	$(document).on("click", "#anwer_btn", function(){
+		location.href="${path}/board/answer?bno=${one.bno}";
 	});
 	
 

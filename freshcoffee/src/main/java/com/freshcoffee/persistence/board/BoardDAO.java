@@ -18,4 +18,6 @@ public interface BoardDAO {
 //	레코드 갯수 계산
 	public int countArticle(String search_option, String keyword);
 	public void updateReplyCnt(HashMap<String, Object> map); // 댓글 조회수 증가
+	public void updateStep(int ref, int re_step);
+	public void answer(BoardDTO bDto);
 }
