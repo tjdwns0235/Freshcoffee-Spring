@@ -90,4 +90,18 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.insert("board.answer", bDto);
 	}
 
+	@Override
+	public int addAttach(String name) {
+		log.info(name);
+		
+		return sqlSession.insert("board.addAttach", name);
+	}
+
+	@Override
+	public List<String> getAttach(int bno) {
+		log.info("BoardDAOImpl getAttach이동");
+		
+		return sqlSession.selectList("board.getAttach", bno);
+	}
+
 }

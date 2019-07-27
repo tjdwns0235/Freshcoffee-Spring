@@ -8,9 +8,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.freshcoffee.domain.board.BoardDTO;
@@ -27,6 +29,14 @@ public class BoardController {
 	@Inject
 	private BoardService service;
 	
+	
+	// 첨부파일 목록을 리턴
+	//ArrayList를 json 배열로 변환하여 리턴
+	@RequestMapping("getAttach/{bno}")
+	@ResponseBody //view가 아닌 데이터 자체를 리턴
+	public List<String> getAttach(@PathVariable int bno){
+		return service.getAttach(bno);
+	}
 	// 게시글 전체 리스트 출력
 	@RequestMapping(value = "list", method=RequestMethod.GET)
 	public ModelAndView list(
@@ -89,8 +99,6 @@ public class BoardController {
 		log.info("게시글 등록 페이지 출력");
 		service.create(bDto);
 		
-		String writer = (String)session.getAttribute("userid");
-		bDto.setWriter(writer);
 		return "redirect:/board/view?bno=" + bDto.getBno();
 	}
 	@RequestMapping(value = "delete", method=RequestMethod.GET)
@@ -148,4 +156,5 @@ public class BoardController {
 		service.answer(bDto);
 		return "redirect:/board/list";
 	}
+	
 }

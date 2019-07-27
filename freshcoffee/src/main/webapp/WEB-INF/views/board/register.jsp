@@ -160,12 +160,7 @@
 					
 					</ul>
 				</div>
-			<!-- 	<span><input type="file" name="uploadfile" id="uploadfile" style="display:none">
-					<input type="button" class="btn btn-file" value="파일선택">
-					<span class ="files" id="file-name" style="height: 29px; border: none;">
-					<span id="now_file_size">
-						<i class="fas fa-times" id="close_file_btn" style="display:none;"></i>
-					</span> -->
+				
 				<button type="button" class="update_Btn">게시글등록</button>
 			</div>
 			</form>
@@ -207,7 +202,7 @@
 		} else {  // 게시글 수정
 			var str='';
 			str += "<input type='hidden' name='bno' value='" + bno + "'>";
-			$("#frm_add").append(str);
+			$("#frm_board").append(str);
 		}
 		
 		// 첨부파일 목록 출력
@@ -247,25 +242,28 @@
 				if(deleteFileList.length > 0) {
 					$.post('${path}/upload/deleteAllFile', {files:deleteFileList}, function(){});
 				}
-				
+			$("#frm_board").append(str);	
 			 $('#frm_board').submit();
 			});
 			// Drag & Drop 기본효과 막음
 			$('.fileDrop').on('dragenter dragover', function(e){
 				e.preventDefault();
 			});
+			// 1. 파일을 드래그 앤 드롭 했을때
 			$('.fileDrop').on('drop', function(e){
+				// 2. Html은 드래그 했을때 파일을 불러오므로 그래그인드롭시 파일 실행을 막을때
 				e.preventDefault();
 				
 				//	Ajax 파일 -> D:\\upload
 				var files = e.originalEvent.dataTransfer.files; //드래그에 전달된 첨부파일 전부
 				var file = files[0]; //그중 하나만 꺼내옴
-				alert("file:"+file);
 				
 				// 폼 데이터에 첨부파일 추가
 				var formData = new FormData();	//폼 객체
 				formData.append("file", file);	//폼에 파일변수 추가
 				// 서버에 파일 업로드(백그라운드에서 실행됨) 
+				// append와 insert는 추가인데 차이점은 append는 무조건 맨 하단 즉 마지막에 추가가 된다 리눅스도 마찬가지다
+				// append기능이 있다라는건 보통 중간에 추가가 안 되고 무조건 마지막에 추가가된다라는것이다
 				// contentType: false => multipart/form-data로 처리
 				$.ajax({
 					url:"${path}/upload/uploadAjax",
@@ -276,7 +274,7 @@
 					type: "post",
 					success: function(data){
 						console.log(data);
-						//data: 업로드한 파일정보와 http 상태코드
+						//data: 업로드한 파일정보(썸네일 이름)와 http 상태코드
 						printFiles(data);  // 첨부파일 출력 메서드 호출
 					}
 				})
@@ -372,6 +370,7 @@
 	    if (checkImageType(fullName)) {
 	        imgSrc = "${path}/upload/displayFile?fileName=" + fullName; // 썸네일 이미지 링크
 	        uuidFileName = fullName.substr(14);
+	        // 실제 uuid가 붙은 원본파일 이
 	        var originalImg = fullName.substr(0, 12) + fullName.substr(14);
 	        // 원본 이미지 요청 링크
 	        originalFileUrl = "${path}/upload/displayFile?fileName=" + originalImg;
@@ -400,6 +399,7 @@
 	}
 	//첨부파일 출력
 	function printFiles(data) {
+		// 썸네일 이름 data = /2019/07/12/s_dkdjfjlsdf라이언.jpg
 	    // 파일 정보 처리
 	    var fileInfo = getFileInfo(data);
 	    /* console.log(fileInfo); */

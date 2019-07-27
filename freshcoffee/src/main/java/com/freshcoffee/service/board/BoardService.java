@@ -17,5 +17,6 @@ public interface BoardService {
 //	레코드 갯수 계산
 	public int countArticle(String search_option, String keyword);
 	
-	public void answer(BoardDTO bDto); // 답글 등
+	public void answer(BoardDTO bDto); // 답글 등록
+	public List<String> getAttach(int bno);
 }

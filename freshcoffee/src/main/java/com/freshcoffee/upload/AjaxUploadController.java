@@ -50,6 +50,9 @@ public class AjaxUploadController {
 	public ResponseEntity<String> uploadAjax(MultipartFile file) throws Exception {
 		// 업로드한 파일 정보와 Http 상태 코드를 함께 리턴
 		return new ResponseEntity<String>(UploadFileUtils.uploadFile(uploadPath, file.getOriginalFilename(), file.getBytes()), HttpStatus.OK);
+		// ResponseEntity는 상태코드를 보낼때 사용한다 성공하면 200번대 200번대는 성공했을때 400번은 서버 500번은 화면단 못 찾을때
+		//UploadFileUtils.uploadFile은 클래스의 메서드를 찾아라 하는건데 그럴 수 있으려면 바로 static선언을 해줘야 가능하다
+		//upload는 리소스로 빈 등록한 파일 위
 	}
 
 	// 이미지 표시 기능

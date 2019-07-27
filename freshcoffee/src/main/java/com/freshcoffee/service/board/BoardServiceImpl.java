@@ -20,10 +20,32 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Inject
 	private BoardDAO bDao;
-
+	
+	@Transactional
 	@Override
 	public int create(BoardDTO bDto) {
-		return bDao.create(bDto);
+		// 게시글 등록
+		// attach 테이블에 첨부파일 이름 추
+		int num1 = bDao.create(bDto);
+		
+		
+		String[] files = bDto.getFiles();
+		
+		log.info(">>>>>>>^^"+files.length);
+		
+		for (String string : files) {
+			System.out.println(string);
+		}
+		if (files == null) return num1; // 첨부파일 없으면 skip 
+		
+		for (String name : files) {
+			
+			log.info(name);
+			num1 = bDao.addAttach(name);
+			// attach 테이블에 insert
+		}
+		return num1;
+		
 	}
 
 	@Override
@@ -82,6 +104,13 @@ public class BoardServiceImpl implements BoardService {
 		bDto.setRe_level(bDto.getRe_level() + 1);
 		bDao.answer(bDto);
 		
+	}
+
+	@Override
+	public List<String> getAttach(int bno) {
+		log.info("BoardServiceImpl getAttach 이동");
+		
+		return bDao.getAttach(bno);
 	}
 
 	

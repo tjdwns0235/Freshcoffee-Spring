@@ -20,4 +20,6 @@ public interface BoardDAO {
 	public void updateReplyCnt(HashMap<String, Object> map); // 댓글 조회수 증가
 	public void updateStep(int ref, int re_step);
 	public void answer(BoardDTO bDto);
+	public int addAttach(String name);
+	public List <String> getAttach(int bno);
 }
